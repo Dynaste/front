@@ -25,15 +25,15 @@ export default function App() {
             left: 20,
             right: 20,
             elevation: 0,
-            backgroundColor: '#ffffff',
+            backgroundColor: '#ededed',
             borderRadius: 15,
-            height: 80,
-            ...styles.shadow
+            border: 'none',
+            height: 80
           }
         }}>
         <Tab.Screen name="Home" component={HomePage} options={{
-          tabBarIcon:({focused}) => (
-            <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
               <Image
                 source={require('./assets/home.png')}
                 resizeMode='contain'
@@ -41,16 +41,16 @@ export default function App() {
                   width: 25,
                   height: 25,
                   tintColor: focused ? '#e32f45' : '#478c94'
-                }}/>
-                <Text>
-                  Home
+                }} />
+              <Text>
+                Home
                 </Text>
             </View>
           )
-        }}/>
+        }} />
         <Tab.Screen name="Calendar" component={CalendarPage} options={{
-          tabBarIcon:({focused}) => (
-            <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
               <Image
                 source={require('./assets/calendar.png')}
                 resizeMode='contain'
@@ -58,30 +58,32 @@ export default function App() {
                   width: 25,
                   height: 25,
                   tintColor: focused ? '#e32f45' : '#478c94'
-                }}/>
-                <Text>
-                  Calendar
+                }} />
+              <Text>
+                Calendar
                 </Text>
             </View>
           )
-        }}/>
+        }} />
         <Tab.Screen name="Create" component={HomePage} options={{
-          tabBarIcon:({focused}) => (
-            <View style={{alignItems: 'center', justifyContent: 'center', top: -40, backgroundColor: '#478c94', borderRadius: '50%', padding: 10}}>
-              <Image
-                source={require('./assets/plus.png')}
-                resizeMode='contain'
-                style={{
-                  width: 35,
-                  height: 35,
-                  tintColor: '#fff'
-                }}/>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: 'center', top: -30, justifyContent: 'center', height: 60, width: 60 * 2, borderBottomLeftRadius: 60 * 2, borderBottomRightRadius: 60 * 2, backgroundColor: '#fff' }}>
+              <View style={{ alignItems: 'center', justifyContent: 'center', top: -15, backgroundColor: '#478c94', borderRadius: '50%', padding: 10 }}>
+                <Image
+                  source={require('./assets/plus.png')}
+                  resizeMode='contain'
+                  style={{
+                    width: 40,
+                    height: 40,
+                    tintColor: '#fff'
+                  }} />
+              </View>
             </View>
           )
-        }}/>
+        }} />
         <Tab.Screen name="Notifications" component={NotificationPage} options={{
-          tabBarIcon:({focused}) => (
-            <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
               <Image
                 source={require('./assets/archive.png')}
                 resizeMode='contain'
@@ -89,16 +91,16 @@ export default function App() {
                   width: 25,
                   height: 25,
                   tintColor: focused ? '#e32f45' : '#478c94'
-                }}/>
-                <Text>
-                  Todos
+                }} />
+              <Text>
+                Todos
                 </Text>
             </View>
           )
-        }}/>
+        }} />
         <Tab.Screen name="Party" component={PartyPage} options={{
-          tabBarIcon:({focused}) => (
-            <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
               <Image
                 source={require('./assets/profile-user.png')}
                 resizeMode='contain'
@@ -106,13 +108,13 @@ export default function App() {
                   width: 25,
                   height: 25,
                   tintColor: focused ? '#e32f45' : '#478c94'
-                }}/>
-                <Text>
-                  Settings
+                }} />
+              <Text>
+                Settings
                 </Text>
             </View>
           )
-        }}/>
+        }} />
       </Tab.Navigator>
     </NavigationContainer>
   );

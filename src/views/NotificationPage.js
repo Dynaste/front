@@ -1,13 +1,30 @@
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { Dimensions } from 'react-native';
 import React from 'react';
-import { Text } from 'react-native';
 
 const NotificationPage = ({ navigation }) => {
 
     return(
-        <>
-            <Text>I AM NotificationPage</Text>
-        </>
+        <SafeAreaView>
+            <ScrollView>
+                <View style={styles.main}>
+                    <Text>I am Todos</Text>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     )
-}   
+}  
+ 
+const styles = StyleSheet.create({
+    main:{
+      display:'flex',
+      flexWrap:'nowrap',
+      minWidth: Dimensions.get('window').width,
+      flexDirection:'row',
+      height: Dimensions.get('window').height,
+      backgroundColor: '#fff'
+    }
+   }); 
 
 export default NotificationPage;
