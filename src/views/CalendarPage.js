@@ -7,8 +7,8 @@ const CalendarPage = ({ navigation }) => {
 
     return(
         <SafeAreaView>
-            <ScrollView>
-                <View style={styles.main}>
+            <ScrollView style={styles.main}>
+                <View>
                     <Text>I am CalendarPage</Text>
                 </View>
             </ScrollView>

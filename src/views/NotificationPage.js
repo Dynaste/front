@@ -7,8 +7,8 @@ const NotificationPage = ({ navigation }) => {
 
     return(
         <SafeAreaView>
-            <ScrollView>
-                <View style={styles.main}>
+            <ScrollView style={styles.main}>
+                <View>
                     <Text>I am Todos</Text>
                 </View>
             </ScrollView>

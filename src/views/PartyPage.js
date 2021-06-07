@@ -7,8 +7,8 @@ const PartyPage = ({ navigation }) => {
 
     return(
         <SafeAreaView>
-            <ScrollView>
-                <View style={styles.main}>
+            <ScrollView style={styles.main}>
+                <View>
                     <Text>I am settings</Text>
                 </View>
             </ScrollView>
