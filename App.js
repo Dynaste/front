@@ -4,11 +4,9 @@ import CalendarPage from "./src/views/CalendarPage";
 import HomePage from "./src/views/HomePage";
 import { NavigationContainer } from "@react-navigation/native";
 import NotificationPage from "./src/views/NotificationPage";
-import PartyPage from "./src/views/PartyPage";
+import ProfilPage from "./src/views/ProfilPage";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import { Dimensions } from 'react-native';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -27,7 +25,7 @@ export default function App() {
             backgroundColor: "#ededed",
             borderRadius: 15,
             border: "none",
-            height: 70
+            height: 70,
           },
         }}
       >
@@ -88,12 +86,14 @@ export default function App() {
           component={HomePage}
           options={{
             tabBarIcon: ({ focused }) => (
-              <View style={{
-                position:"relative",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              {/* <View
+              <View
+                style={{
+                  position: "relative",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {/* <View
                 style={{
                   position: "absolute",
                   top: 5,
@@ -107,12 +107,15 @@ export default function App() {
               >
                 </View> */}
                 <View
-                  style={[styles.shadow, {
-                    top: -20,
-                    backgroundColor: "#7F5DF0",
-                    borderRadius: "50%",
-                    padding: 10
-                  }]}
+                  style={[
+                    styles.shadow,
+                    {
+                      top: -20,
+                      backgroundColor: "#7F5DF0",
+                      borderRadius: "50%",
+                      padding: 10,
+                    },
+                  ]}
                 >
                   <Image
                     source={require("./assets/plus.png")}
@@ -156,7 +159,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Party"
-          component={PartyPage}
+          component={ProfilPage}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -201,5 +204,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
-  }
+  },
 });
