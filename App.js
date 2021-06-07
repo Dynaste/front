@@ -47,7 +47,9 @@ export default function App() {
                   style={{
                     width: 25,
                     height: 25,
-                    tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    // tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    tintColor: "#7F5DF0",
+                    opacity: focused ? 1 : 0.75
                   }}
                 />
                 {/* <Text>Home</Text> */}
@@ -73,7 +75,9 @@ export default function App() {
                   style={{
                     width: 25,
                     height: 25,
-                    tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    // tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    tintColor: "#7F5DF0",
+                    opacity: focused ? 1 : 0.75
                   }}
                 />
                 {/* <Text>Calendar</Text> */}
@@ -149,7 +153,9 @@ export default function App() {
                   style={{
                     width: 25,
                     height: 25,
-                    tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    // tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    tintColor: "#7F5DF0",
+                    opacity: focused ? 1 : 0.75
                   }}
                 />
                 {/* <Text>Todos</Text> */}
@@ -175,7 +181,9 @@ export default function App() {
                   style={{
                     width: 25,
                     height: 25,
-                    tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    // tintColor: focused ? "#7F5DF0" : "#b1a1e8",
+                    tintColor: "#7F5DF0",
+                    opacity: focused ? 1 : 0.75
                   }}
                 />
                 {/* <Text>Settings</Text> */}
