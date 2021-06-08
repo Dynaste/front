@@ -7,21 +7,36 @@ import {
   Pressable,
 } from "react-native";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import {
   distanceBetween2Element,
   borderRadiusValue,
   displayDim,
 } from "../../helpers/cssValues";
 
+import {
+  login
+} from "../../helpers/api";
+
 import React, { useState } from "react";
+import tokenStore from "../reducers/tokenReducer";
 
 const ProfilPage = ({ navigation }) => {
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
 
+  const identity = useSelector((state) => state.tokenRedux);
+  const dispatch = useDispatch();
 
-  const postLogin = () => {
-    
+
+  const postLogin = async() => {
+    const res = await login(id, pwd);
+
+    console.log(res)
+    if(res.data.code === 202){
+      dispatch({type: "add_jwt", payload: {jwt: res.data.token, date: Date.now()}})
+    }
   }
 
   return (
@@ -49,6 +64,9 @@ const ProfilPage = ({ navigation }) => {
           placeholder="Identifiant"
           onChangeText={(text) => setId(text)}
           value={id}
+          autoFocus={true}
+          autoComplete="email"
+          keyboardType="email-address"
         />
         <TextInput
           style={[
@@ -62,6 +80,8 @@ const ProfilPage = ({ navigation }) => {
           placeholder="Mot de passe"
           onChangeText={(text) => setPwd(text)}
           value={pwd}
+          secureTextEntry={true}
+          autoCorrect={false}
         />
         <Text
           style={{
@@ -83,7 +103,7 @@ const ProfilPage = ({ navigation }) => {
             height: 60,
             marginTop: distanceBetween2Element,
           }}
-          onPress={console.log("Need to redirect into new account")}
+          onPress={() => postLogin()}
         >
           <Text style={{ color: "#fff", fontSize: 20 }}>Connexion</Text>
         </Pressable>
@@ -126,7 +146,6 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     fontSize: 20,
-    color: "#fff",
   },
   inputContainer: {
     width: displayDim.x,

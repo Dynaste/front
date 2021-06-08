@@ -1,7 +1,6 @@
 const initialState = {
     jwt: "",
     creationDate: "",
-    uniqueCode: "",
     log: false
   };
   
@@ -9,8 +8,8 @@ const initialState = {
     const { type, payload } = action;
     switch (type) {
       case "add_jwt":
-        return { ...state, jwt: payload.jwt, creationDate: payload.date , log: true};
-
+            return { ...state, jwt: payload.jwt, creationDate: payload.date, log: true};
+    
       case "reset_jwt":
         return initialState;
   
