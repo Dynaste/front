@@ -1,6 +1,5 @@
 import {
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -14,13 +13,16 @@ import {
   displayDim,
 } from "../../helpers/cssValues";
 
-import { AntDesign } from "@expo/vector-icons";
-
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const ProfilPage = ({ navigation }) => {
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
+
+
+  const postLogin = () => {
+    
+  }
 
   return (
     <SafeAreaView style={styles.main}>
@@ -71,30 +73,24 @@ const ProfilPage = ({ navigation }) => {
           J'ai oublié mon mot de passe
         </Text>
         <Pressable
-        style={{
-          borderRadius: 10,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#7F5DF0",
-          width: displayDim.x - 80,
-          height: 60,
-          marginTop: distanceBetween2Element
-        }}
-        onPress={console.log("Need to redirect into new account")}
-      >
-        <Text style={{ color: "#fff", fontSize: 20 }}>
-          Connexion
-        </Text>
-      </Pressable>
-        {/* <AntDesign
-          style={{ marginTop: distanceBetween2Element }}
-          name="rightcircleo"
-          size={42}
-          color="#7F5DF0"
-        /> */}
+          style={{
+            borderRadius: 10,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#7F5DF0",
+            width: displayDim.x - 80,
+            height: 60,
+            marginTop: distanceBetween2Element,
+          }}
+          onPress={console.log("Need to redirect into new account")}
+        >
+          <Text style={{ color: "#fff", fontSize: 20 }}>Connexion</Text>
+        </Pressable>
       </View>
-      <Text style={{marginTop: distanceBetween2Element, fontSize: 24}}>OU</Text>
+      <Text style={{ marginTop: distanceBetween2Element, fontSize: 24 }}>
+        OU
+      </Text>
       <Pressable
         style={{
           borderRadius: 10,
@@ -104,7 +100,7 @@ const ProfilPage = ({ navigation }) => {
           backgroundColor: "#7F5DF0",
           width: displayDim.x - 40,
           height: 60,
-          marginTop: distanceBetween2Element
+          marginTop: distanceBetween2Element,
         }}
         onPress={console.log("Need to redirect into new account")}
       >
