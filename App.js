@@ -1,21 +1,18 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
+import { combineReducers, createStore } from "redux";
+import { persistReducer, persistStore } from "redux-persist";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import CalendarPage from "./src/views/CalendarPage";
 import HomePage from "./src/views/HomePage";
 import { NavigationContainer } from "@react-navigation/native";
 import NotificationPage from "./src/views/NotificationPage";
-import ProfilPage from "./src/views/ProfilPage";
-import React, {useState, useEffect} from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-// REDUX STORE
-import { createStore, combineReducers } from "redux";
-import { Provider } from "react-redux";
-import tokenReducer from "./src/reducers/tokenReducer";
-
-import { persistStore, persistReducer } from "redux-persist";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PersistGate } from "redux-persist/integration/react";
+import ProfilPage from "./src/views/ProfilPage";
+import { Provider } from "react-redux";
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import tokenReducer from "./src/reducers/tokenReducer";
 
 export default function App() {
   const Tab = createBottomTabNavigator();

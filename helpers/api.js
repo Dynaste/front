@@ -19,10 +19,3 @@ export const login = async(body) => {
         return err
     }    
 }
-
-/*
-rootroot
-
-maximemary.pro@gmail.com
-
-*/
