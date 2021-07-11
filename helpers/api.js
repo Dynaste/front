@@ -2,13 +2,11 @@ import axios from "axios";
 
 const urlDev = "http://localhost:4000"
 
-export const login = async(id, pwd) => {
-    const body = {
-        "email": id,
-        "password": pwd
-    }
+export const login = async(body) => {
+    console.log('POST CALL');
+    console.log(body)
+   
     const headers = {
-        'Accept':'application/json',
         'Content-Type':'application/json'
       }
 
