@@ -1,16 +1,18 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Dimensions } from 'react-native';
+import PartyResume from '../components/PartyResume';
 import React from 'react';
 
 const HomePage = ({ navigation }) => {
 
     return(
-        <SafeAreaView>
-            <ScrollView style={styles.main}>
+        <SafeAreaView style={styles.main}>
+            <ScrollView>
                 <View>
                     <Text>I AM HOMEPAGE</Text>
                 </View>
+                <PartyResume />
             </ScrollView>
         </SafeAreaView>
     )
