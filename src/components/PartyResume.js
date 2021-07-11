@@ -3,7 +3,6 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from "react-native";
 import {
@@ -16,7 +15,7 @@ import React from "react";
 
 const PartyResume = () => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={() => console.log('redirect to party details')}>
       <View style={styles.pictureContainer}>
         <Image
           source={require("./../../assets/partyPictureDefault.jpeg")}

@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
 
   const postLogin = async () => {
     const body = {
-      email: email,
+      email: email.toLowerCase(),
       password: pwd,
     };
     const res = await login(body);
