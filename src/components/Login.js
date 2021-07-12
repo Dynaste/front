@@ -20,8 +20,6 @@ const Login = ({ navigation }) => {
       password: pwd,
     };
     const res = await login(body);
-
-    console.log(res);
     if (res.data.code === 202) {
       dispatch({
         type: "add_jwt",
@@ -35,15 +33,7 @@ const Login = ({ navigation }) => {
   return (
     <>
       <View style={styles.loginContainer}>
-        <Text
-          style={{
-            fontSize: 24,
-            textAlign: "center",
-            marginBottom: distanceBetween2Element,
-          }}
-        >
-          LOGIN
-        </Text>
+        <Text style={styles.title}>LOGIN</Text>
         <TextInput
           style={[
             styles.logInput,
@@ -76,26 +66,11 @@ const Login = ({ navigation }) => {
           secureTextEntry={true}
           autoCorrect={false}
         />
-        <Text
-          style={{
-            textDecorationLine: "underline",
-            color: "#0a5894",
-            marginTop: distanceBetween2Element,
-          }}
-        >
+        <Text style={styles.forgotPasswordTxt}>
           J'ai oublié mon mot de passe
         </Text>
         <Pressable
-          style={{
-            borderRadius: 10,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#7F5DF0",
-            width: displayDim.x - 80,
-            height: 60,
-            marginTop: distanceBetween2Element,
-          }}
+          style={styles.loginButton}
           onPress={() => postLogin()}
         >
           <Text style={{ color: "#fff", fontSize: 20 }}>Connexion</Text>
@@ -105,16 +80,7 @@ const Login = ({ navigation }) => {
         OU
       </Text>
       <Pressable
-        style={{
-          borderRadius: 10,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#7F5DF0",
-          width: displayDim.x - 40,
-          height: 60,
-          marginTop: distanceBetween2Element,
-        }}
+        style={styles.loginButton}
         onPress={() => console.log("Need to redirect into new account")}
       >
         <Text style={{ color: "#fff", fontSize: 20 }}>
@@ -126,6 +92,11 @@ const Login = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    textAlign: "center",
+    marginBottom: distanceBetween2Element,
+  },
   logInput: {
     height: 60,
     width: "100%",
@@ -160,6 +131,21 @@ const styles = StyleSheet.create({
     elevation: 10,
     marginTop: 75,
     borderRadius: borderRadiusValue,
+  },
+  forgotPasswordTxt: {
+    textDecorationLine: "underline",
+    color: "#0a5894",
+    marginTop: distanceBetween2Element,
+  },
+  loginButton: {
+    borderRadius: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#7F5DF0",
+    width: displayDim.x - 80,
+    height: 60,
+    marginTop: distanceBetween2Element,
   },
 });
 

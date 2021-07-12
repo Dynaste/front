@@ -20,11 +20,7 @@ const PartyResume = ({navigation}) => {
         <Image
           source={require("./../../assets/partyPictureDefault.jpeg")}
           resizeMode="contain"
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: borderRadiusValue,
-          }}
+          style={styles.image}
         />
         <View style={styles.date}>
           <Text>Date</Text>
@@ -74,6 +70,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: displayDim.y / 4.5,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: borderRadiusValue,
   },
   date: {
     position: "absolute",
