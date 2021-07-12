@@ -1,16 +1,15 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Dimensions } from 'react-native';
-import PartyResume from '../components/PartyResume';
 import React from 'react';
 
-const PartyPage = ({ navigation }) => {
+const PartyCreationPage = ({ navigation }) => {
 
     return(
         <SafeAreaView>
             <ScrollView style={styles.main}>
                 <View>
-                    <PartyResume navigation={navigation}/>
+                    <Text>I am settings</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -28,5 +27,5 @@ const styles = StyleSheet.create({
     }
    });  
 
-export default PartyPage
+export default PartyCreationPage
 ;

@@ -13,9 +13,9 @@ import {
 
 import React from "react";
 
-const PartyResume = () => {
+const PartyResume = ({navigation}) => {
   return (
-    <Pressable style={styles.container} onPress={() => console.log('redirect to party details')}>
+    <Pressable style={styles.container} onPress={() => navigation.navigate("PartyDetails", {testId: 'HELLO WORLD'})}>
       <View style={styles.pictureContainer}>
         <Image
           source={require("./../../assets/partyPictureDefault.jpeg")}

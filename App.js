@@ -30,7 +30,6 @@ export default function App() {
   const store = createStore(rootReducer);
   const persistor = persistStore(store);
 
-
   return (
     <NavigationContainer>
       <Provider store={store}>
