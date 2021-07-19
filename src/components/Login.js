@@ -1,8 +1,10 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import {
   borderRadiusValue,
+  classicBackground,
   displayDim,
   distanceBetween2Element,
+  mainColor
 } from "../../helpers/cssValues";
 
 import React from "react";
@@ -39,7 +41,7 @@ const Login = ({ navigation }) => {
             styles.logInput,
             {
               borderWidth: 2,
-              borderColor: "#7F5DF0",
+              borderColor: mainColor,
               borderTopRightRadius: borderRadiusValue,
               marginBottom: 1,
             },
@@ -56,7 +58,7 @@ const Login = ({ navigation }) => {
             styles.logInput,
             {
               borderWidth: 2,
-              borderColor: "#7F5DF0",
+              borderColor: mainColor,
               borderBottomLeftRadius: borderRadiusValue,
             },
           ]}
@@ -73,7 +75,7 @@ const Login = ({ navigation }) => {
           style={styles.loginButton}
           onPress={() => postLogin()}
         >
-          <Text style={{ color: "#fff", fontSize: 20 }}>Connexion</Text>
+          <Text style={{ color: classicBackground, fontSize: 20 }}>Connexion</Text>
         </Pressable>
       </View>
       <Text style={{ marginTop: distanceBetween2Element, fontSize: 24 }}>
@@ -83,7 +85,7 @@ const Login = ({ navigation }) => {
         style={styles.loginButton}
         onPress={() => console.log("Need to redirect into new account")}
       >
-        <Text style={{ color: "#fff", fontSize: 20 }}>
+        <Text style={{ color: classicBackground, fontSize: 20 }}>
           J'ai pas encore de compte
         </Text>
       </Pressable>
@@ -109,7 +111,6 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "red",
   },
   loginContainer: {
     display: "flex",
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#7F5DF0",
+    backgroundColor: mainColor,
     width: displayDim.x - 80,
     height: 60,
     marginTop: distanceBetween2Element,

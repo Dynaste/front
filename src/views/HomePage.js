@@ -1,6 +1,5 @@
 import PartyDetails from "../components/PartyDetails";
 import PartyPage from "./PartyPage";
-import PartyResume from "../components/PartyResume";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 

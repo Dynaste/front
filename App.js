@@ -1,4 +1,9 @@
 import { Image, StyleSheet, View } from "react-native";
+import {
+  classicBackground,
+  contrastBackground,
+  mainColor,
+} from "./helpers/cssValues";
 import { combineReducers, createStore } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 
@@ -43,7 +48,7 @@ export default function App() {
                 left: 20,
                 right: 20,
                 elevation: 0,
-                backgroundColor: "#ededed",
+                backgroundColor: contrastBackground,
                 borderRadius: 15,
                 border: "none",
                 height: 70,
@@ -55,23 +60,11 @@ export default function App() {
               component={HomePage}
               options={{
                 tabBarIcon: ({ focused }) => (
-                  <View
-                    style={{
-                      top: 15,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <View style={styles.iconContainer}>
                     <Image
                       source={require("./assets/home.png")}
                       resizeMode="contain"
-                      style={{
-                        width: 25,
-                        height: 25,
-                        tintColor: "#7F5DF0",
-                        opacity: focused ? 1 : 0.75,
-                      }}
-                    />
+                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
                   </View>
                 ),
               }}
@@ -81,23 +74,11 @@ export default function App() {
               component={CalendarPage}
               options={{
                 tabBarIcon: ({ focused }) => (
-                  <View
-                    style={{
-                      top: 15,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <View style={styles.iconContainer}>
                     <Image
                       source={require("./assets/calendar.png")}
                       resizeMode="contain"
-                      style={{
-                        width: 25,
-                        height: 25,
-                        tintColor: "#7F5DF0",
-                        opacity: focused ? 1 : 0.75,
-                      }}
-                    />
+                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
                   </View>
                 ),
               }}
@@ -119,7 +100,7 @@ export default function App() {
                         styles.shadow,
                         {
                           top: -20,
-                          backgroundColor: "#7F5DF0",
+                          backgroundColor: mainColor,
                           borderRadius: "50%",
                           padding: 10,
                         },
@@ -131,7 +112,7 @@ export default function App() {
                         style={{
                           width: 40,
                           height: 40,
-                          tintColor: "#fff",
+                          tintColor: classicBackground,
                         }}
                       />
                     </View>
@@ -144,23 +125,11 @@ export default function App() {
               component={NotificationPage}
               options={{
                 tabBarIcon: ({ focused }) => (
-                  <View
-                    style={{
-                      top: 15,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <View style={styles.iconContainer}>
                     <Image
                       source={require("./assets/archive.png")}
                       resizeMode="contain"
-                      style={{
-                        width: 25,
-                        height: 25,
-                        tintColor: "#7F5DF0",
-                        opacity: focused ? 1 : 0.75,
-                      }}
-                    />
+                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
                   </View>
                 ),
               }}
@@ -170,23 +139,11 @@ export default function App() {
               component={ProfilPage}
               options={{
                 tabBarIcon: ({ focused }) => (
-                  <View
-                    style={{
-                      top: 15,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <View style={styles.iconContainer}>
                     <Image
                       source={require("./assets/profile-user.png")}
                       resizeMode="contain"
-                      style={{
-                        width: 25,
-                        height: 25,
-                        tintColor: "#7F5DF0",
-                        opacity: focused ? 1 : 0.75,
-                      }}
-                    />
+                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
                   </View>
                 ),
               }}
@@ -201,12 +158,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: classicBackground,
     alignItems: "center",
     justifyContent: "center",
   },
   shadow: {
-    shadowColor: "#7F5DF0",
+    shadowColor: mainColor,
     shadowOffset: {
       width: 0,
       height: 10,
@@ -214,5 +171,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
+  },
+  iconContainer: {
+    top: 15,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    width: 25,
+    height: 25,
+    tintColor: mainColor
   },
 });

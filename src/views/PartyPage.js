@@ -1,6 +1,9 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import {
+    classicBackground,
+    displayDim
+} from "../../helpers/cssValues";
 
-import { Dimensions } from 'react-native';
 import PartyResume from '../components/PartyResume';
 import React from 'react';
 
@@ -21,10 +24,10 @@ const styles = StyleSheet.create({
     main:{
       display:'flex',
       flexWrap:'nowrap',
-      minWidth: Dimensions.get('window').width,
+      minWidth: displayDim.x,
       flexDirection:'row',
-      height: Dimensions.get('window').height,
-      backgroundColor: '#fff'
+      height: displayDim.y,
+      backgroundColor: classicBackground
     }
    });  
 
