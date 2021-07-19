@@ -13,10 +13,11 @@ import {
   mainColor,
 } from "../../helpers/cssValues";
 
-import { MaterialIcons } from "@expo/vector-icons";
-import Page1 from "./Page1";
-import Page2 from "./Page2";
+import GroceryTab from "./GroceryTab";
+import ParticipantsTab from "./ParticipantsTab";
 import React from "react";
+import ResumeTab from "./ResumeTab";
+import TasksTab from "./TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const PartyDetails = ({ route, navigation }) => {
@@ -48,7 +49,7 @@ const PartyDetails = ({ route, navigation }) => {
           initialRouteName="Feed"
           tabBarOptions={{
             activeTintColor: mainColor,
-            style: { backgroundColor: classicBackground },
+            style: { backgroundColor: classicBackground, marginTop: distanceBetween2Element },
             indicatorStyle: { backgroundColor: mainColor },
             iconStyle: { color: mainColor },
             showLabel: false,
@@ -56,74 +57,50 @@ const PartyDetails = ({ route, navigation }) => {
           }}
         >
           <Tab.Screen
-            name="Résumé"
-            component={Page1}
+            name="Resume"
+            component={ResumeTab}
             options={{
               tabBarIcon: ({ focused }) => (
                   <Image
-                    source={require("./../../assets/calendar.png")}
+                    source={require("./../../assets/list.png")}
                     resizeMode="contain"
-                    style={{
-                      width: 25,
-                      height: 25,
-                      tintColor: mainColor,
-                      opacity: focused ? 1 : 0.75,
-                    }}
-                  />
+                    style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
               ),
             }}
           />
           <Tab.Screen
             name="Participants"
-            component={Page2}
+            component={ParticipantsTab}
             options={{
               tabBarIcon: ({ focused }) => (
                 <Image
-                  source={require("./../../assets/calendar.png")}
+                  source={require("./../../assets/group.png")}
                   resizeMode="contain"
-                  style={{
-                    width: 25,
-                    height: 25,
-                    tintColor: mainColor,
-                    opacity: focused ? 1 : 0.75,
-                  }}
-                />
+                  style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
               ),
             }}
           />
           <Tab.Screen
-            name="Liste de tâches"
-            component={Page2}
+            name="Tasks list"
+            component={TasksTab}
             options={{
                 tabBarIcon: ({ focused }) => (
                   <Image
-                    source={require("./../../assets/calendar.png")}
+                    source={require("./../../assets/archive.png")}
                     resizeMode="contain"
-                    style={{
-                      width: 25,
-                      height: 25,
-                      tintColor: mainColor,
-                      opacity: focused ? 1 : 0.75,
-                    }}
-                  />
+                    style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
                 ),
               }}
           />
           <Tab.Screen
-            name="Liste de course"
-            component={Page2}
+            name="Grocery list"
+            component={GroceryTab}
             options={{
                 tabBarIcon: ({ focused }) => (
                   <Image
-                    source={require("./../../assets/calendar.png")}
+                    source={require("./../../assets/grocery.png")}
                     resizeMode="contain"
-                    style={{
-                      width: 25,
-                      height: 25,
-                      tintColor: mainColor,
-                      opacity: focused ? 1 : 0.75,
-                    }}
-                  />
+                    style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
                 ),
               }}
           />
@@ -149,6 +126,14 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: distanceBetween2Element,
   },
+  icon: {
+    width: 25,
+    height: 25,
+    tintColor: mainColor
+  },
+  header: {
+      margin: distanceBetween2Element
+  }
 });
 
 export default PartyDetails;

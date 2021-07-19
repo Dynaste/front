@@ -2,14 +2,14 @@ import { Text, View } from "react-native";
 
 import React from 'react';
 
-const Page1 = () => {
+const GroceryTab = () => {
     return (
         <View>
             <Text>
-                PAGE 1
+                Grocery
             </Text>
         </View>
     );
 };
 
-export default Page1;
+export default GroceryTab;

@@ -2,14 +2,14 @@ import { Text, View } from "react-native";
 
 import React from 'react';
 
-const Page2 = () => {
+const ParticipantsTab = () => {
     return (
         <View>
             <Text>
-                PAGE 2
+               Participants
             </Text>
         </View>
     );
 };
 
-export default Page2;
+export default ParticipantsTab;
