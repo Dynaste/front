@@ -13,11 +13,11 @@ import {
   mainColor,
 } from "../../helpers/cssValues";
 
-import GroceryTab from "./GroceryTab";
-import ParticipantsTab from "./ParticipantsTab";
+import GroceryTab from "./../views/GroceryTab";
+import ParticipantsTab from "./../views/ParticipantsTab";
 import React from "react";
-import ResumeTab from "./ResumeTab";
-import TasksTab from "./TasksTab";
+import ResumeTab from "./../views/ResumeTab";
+import TasksTab from "./../views/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const PartyDetails = ({ route, navigation }) => {
