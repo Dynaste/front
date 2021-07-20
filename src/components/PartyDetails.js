@@ -41,7 +41,7 @@ const PartyDetails = ({ route, navigation }) => {
                 //   tintColor: "#fff", HERE you can change color of the icon
               }}
             />
-            <Text>Back</Text>
+            <Text style={{fontSize: 16}}>Back</Text>
           </Pressable>
           {/* <Text>infoTest: {JSON.stringify(testId)}</Text> HERE it's the way to display a props directly in the route parameter */}
         </View>
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     minWidth: displayDim.x,
     height: displayDim.y,
     backgroundColor: classicBackground,
+    padding: distanceBetween2Element/2
   },
   backButton: {
     display: "flex",
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     marginTop: distanceBetween2Element,
+    fontSize: 16
   },
   icon: {
     width: 25,
