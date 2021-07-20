@@ -49,7 +49,8 @@ const PartyDetails = ({ route, navigation }) => {
           initialRouteName="Feed"
           tabBarOptions={{
             activeTintColor: mainColor,
-            style: { backgroundColor: classicBackground, marginTop: distanceBetween2Element },
+            style: { backgroundColor: classicBackground,
+            margin: distanceBetween2Element/2},
             indicatorStyle: { backgroundColor: mainColor },
             iconStyle: { color: mainColor },
             showLabel: false,

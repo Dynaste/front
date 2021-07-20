@@ -19,7 +19,7 @@ const ParticipantsTab = ({ navigation }) => {
       <SafeAreaView>
         <ScrollView style={styles.main}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Liste des participants</Text>
+            <Text style={styles.title}>Participants</Text>
             <View style={styles.underline}></View>
           </View>
         </ScrollView>
@@ -35,6 +35,8 @@ const ParticipantsTab = ({ navigation }) => {
       flexDirection: "row",
       height: Dimensions.get("window").height,
       backgroundColor: "#fff",
+      paddingLeft: distanceBetween2Element/2,
+      paddingRight: distanceBetween2Element/2
     },
     titleContainer: {
         marginTop: distanceBetween2Element

@@ -35,6 +35,8 @@ const GroceryTab = ({ navigation }) => {
       flexDirection: "row",
       height: Dimensions.get("window").height,
       backgroundColor: "#fff",
+      paddingLeft: distanceBetween2Element/2,
+      paddingRight: distanceBetween2Element/2
     },
     titleContainer: {
         marginTop: distanceBetween2Element
