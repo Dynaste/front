@@ -1,6 +1,8 @@
 import PartyDetails from "../components/PartyDetails";
 import PartyPage from "./PartyPage";
 import React from "react";
+import { SafeAreaView } from "react-native";
+import { classicBackground } from "./../../helpers/cssValues";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const HomePage = ({ navigation }) => {
@@ -8,14 +10,14 @@ const HomePage = ({ navigation }) => {
   const [details, setDetails] = React.useState(null);
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="PartyPage" component={PartyPage} />
-      <Stack.Screen name="PartyDetails" component={PartyDetails} />
-    </Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="PartyPage" component={PartyPage} />
+          <Stack.Screen name="PartyDetails" component={PartyDetails} />
+        </Stack.Navigator>
   );
 };
 

@@ -15,10 +15,8 @@ import React from "react";
 import { isLog } from "./../../helpers/functions";
 
 const ProfilPage = ({ navigation }) => {
-
   const identity = useSelector((state) => state.tokenRedux);
   const dispatch = useDispatch();
-
 
   return (
     <SafeAreaView style={styles.main}>
@@ -49,6 +47,7 @@ const ProfilPage = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   main: {

@@ -10,9 +10,10 @@ import { persistReducer, persistStore } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CalendarPage from "./src/views/CalendarPage";
 import HomePage from "./src/views/HomePage";
-import Loader from "./src/components/Loader";
 import { NavigationContainer } from "@react-navigation/native";
+import NavigatorPartyCreation from './src/components/NavigatorPartyCreation';
 import NotificationPage from "./src/views/NotificationPage";
+import PartyCreationPage from "./src/views/PartyCreationPage";
 import { PersistGate } from "redux-persist/integration/react";
 import ProfilPage from "./src/views/ProfilPage";
 import { Provider } from "react-redux";
@@ -36,138 +37,11 @@ export default function App() {
   const store = createStore(rootReducer);
   const persistor = persistStore(store);
 
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    if(isLoading){
-      setTimeout(function () {
-        setIsLoading(false);
-    }, 5000);
-    }
-  }, [isLoading])
-
   return (
     <NavigationContainer>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {
-            isLoading &&
-              <Loader />
-          }
-          <Tab.Navigator
-            tabBarOptions={{
-              showLabel: false,
-              style: {
-                position: "absolute",
-                bottom: 25,
-                left: 20,
-                right: 20,
-                elevation: 0,
-                backgroundColor: contrastBackground,
-                borderRadius: 15,
-                border: "none",
-                height: 70,
-              },
-            }}
-          >
-            <Tab.Screen
-              name="Home"
-              component={HomePage}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <View style={styles.iconContainer}>
-                    <Image
-                      source={require("./assets/home.png")}
-                      resizeMode="contain"
-                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
-                    />
-                  </View>
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Calendar"
-              component={CalendarPage}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <View style={styles.iconContainer}>
-                    <Image
-                      source={require("./assets/calendar.png")}
-                      resizeMode="contain"
-                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
-                    />
-                  </View>
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Create"
-              component={HomePage}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <View
-                    style={{
-                      position: "relative",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <View
-                      style={[
-                        styles.shadow,
-                        {
-                          top: -20,
-                          backgroundColor: mainColor,
-                          borderRadius: "50%",
-                          padding: 10,
-                        },
-                      ]}
-                    >
-                      <Image
-                        source={require("./assets/plus.png")}
-                        resizeMode="contain"
-                        style={{
-                          width: 40,
-                          height: 40,
-                          tintColor: classicBackground,
-                        }}
-                      />
-                    </View>
-                  </View>
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Notifications"
-              component={NotificationPage}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <View style={styles.iconContainer}>
-                    <Image
-                      source={require("./assets/archive.png")}
-                      resizeMode="contain"
-                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
-                    />
-                  </View>
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Party"
-              component={ProfilPage}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <View style={styles.iconContainer}>
-                    <Image
-                      source={require("./assets/profile-user.png")}
-                      resizeMode="contain"
-                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
-                    />
-                  </View>
-                ),
-              }}
-            />
-          </Tab.Navigator>
+          <NavigatorPartyCreation/>
         </PersistGate>
       </Provider>
     </NavigationContainer>

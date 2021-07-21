@@ -1,18 +1,23 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+    classicBackground,
+    displayDim
+} from './../../helpers/cssValues'
 
-import { Dimensions } from 'react-native';
 import React from 'react';
 
 const NotificationPage = ({ navigation }) => {
 
     return(
-        <SafeAreaView>
+        <>
+        <SafeAreaView style={{backgroundColor: classicBackground}}>
             <ScrollView style={styles.main}>
                 <View>
                     <Text>I am Todos</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
+        </>
     )
 }  
  
@@ -20,9 +25,9 @@ const styles = StyleSheet.create({
     main:{
       display:'flex',
       flexWrap:'nowrap',
-      minWidth: Dimensions.get('window').width,
+      minWidth: displayDim.x,
       flexDirection:'row',
-      height: Dimensions.get('window').height,
+      height: displayDim.y,
       backgroundColor: '#fff'
     }
    }); 

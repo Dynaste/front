@@ -49,7 +49,7 @@ const Login = ({ navigation }) => {
           placeholder="Identifiant"
           onChangeText={(text) => setEmail(text)}
           value={email}
-          autoFocus={true}
+          autoFocus={false}
           autoComplete="email"
           keyboardType="email-address"
         />

@@ -25,89 +25,97 @@ const PartyDetails = ({ route, navigation }) => {
   const Tab = createMaterialTopTabNavigator();
 
   return (
-    <SafeAreaView>
-      <View style={styles.main}>
-        <View>
-          <Pressable
-            onPress={() => navigation.navigate("PartyPage")}
-            style={styles.backButton}
+    <>
+      <SafeAreaView style={{ backgroundColor: classicBackground }}>
+        <View style={styles.main}>
+          <View>
+            <Pressable
+              onPress={() => navigation.navigate("PartyPage")}
+              style={styles.backButton}
+            >
+              <Image
+                source={require("./../../assets/left-arrow.png")}
+                resizeMode="contain"
+                style={{
+                  width: 20,
+                  height: 20,
+                  //   tintColor: "#fff", HERE you can change color of the icon
+                }}
+              />
+              <Text style={{ fontSize: 16 }}>Back</Text>
+            </Pressable>
+            {/* <Text>infoTest: {JSON.stringify(testId)}</Text> HERE it's the way to display a props directly in the route parameter */}
+          </View>
+          <Tab.Navigator
+            initialRouteName="Feed"
+            tabBarOptions={{
+              activeTintColor: mainColor,
+              style: {
+                backgroundColor: classicBackground,
+                margin: distanceBetween2Element / 2,
+              },
+              indicatorStyle: { backgroundColor: mainColor },
+              iconStyle: { color: mainColor },
+              showLabel: false,
+              showIcon: true,
+            }}
           >
-            <Image
-              source={require("./../../assets/left-arrow.png")}
-              resizeMode="contain"
-              style={{
-                width: 20,
-                height: 20,
-                //   tintColor: "#fff", HERE you can change color of the icon
-              }}
-            />
-            <Text style={{fontSize: 16}}>Back</Text>
-          </Pressable>
-          {/* <Text>infoTest: {JSON.stringify(testId)}</Text> HERE it's the way to display a props directly in the route parameter */}
-        </View>
-        <Tab.Navigator
-          initialRouteName="Feed"
-          tabBarOptions={{
-            activeTintColor: mainColor,
-            style: { backgroundColor: classicBackground,
-            margin: distanceBetween2Element/2},
-            indicatorStyle: { backgroundColor: mainColor },
-            iconStyle: { color: mainColor },
-            showLabel: false,
-            showIcon: true,
-          }}
-        >
-          <Tab.Screen
-            name="Resume"
-            component={ResumeTab}
-            options={{
-              tabBarIcon: ({ focused }) => (
+            <Tab.Screen
+              name="Resume"
+              component={ResumeTab}
+              options={{
+                tabBarIcon: ({ focused }) => (
                   <Image
                     source={require("./../../assets/list.png")}
                     resizeMode="contain"
-                    style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Participants"
-            component={ParticipantsTab}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <Image
-                  source={require("./../../assets/group.png")}
-                  resizeMode="contain"
-                  style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Tasks list"
-            component={TasksTab}
-            options={{
+                    style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                  />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Participants"
+              component={ParticipantsTab}
+              options={{
+                tabBarIcon: ({ focused }) => (
+                  <Image
+                    source={require("./../../assets/group.png")}
+                    resizeMode="contain"
+                    style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                  />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Tasks list"
+              component={TasksTab}
+              options={{
                 tabBarIcon: ({ focused }) => (
                   <Image
                     source={require("./../../assets/archive.png")}
                     resizeMode="contain"
-                    style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
+                    style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                  />
                 ),
               }}
-          />
-          <Tab.Screen
-            name="Grocery list"
-            component={GroceryTab}
-            options={{
+            />
+            <Tab.Screen
+              name="Grocery list"
+              component={GroceryTab}
+              options={{
                 tabBarIcon: ({ focused }) => (
                   <Image
                     source={require("./../../assets/grocery.png")}
                     resizeMode="contain"
-                    style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
+                    style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                  />
                 ),
               }}
-          />
-        </Tab.Navigator>
-      </View>
-    </SafeAreaView>
+            />
+          </Tab.Navigator>
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
     minWidth: displayDim.x,
     height: displayDim.y,
     backgroundColor: classicBackground,
-    padding: distanceBetween2Element/2
+    padding: distanceBetween2Element / 2,
   },
   backButton: {
     display: "flex",
@@ -132,11 +140,11 @@ const styles = StyleSheet.create({
   icon: {
     width: 25,
     height: 25,
-    tintColor: mainColor
+    tintColor: mainColor,
   },
   header: {
-      margin: distanceBetween2Element
-  }
+    margin: distanceBetween2Element,
+  },
 });
 
 export default PartyDetails;
