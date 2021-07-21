@@ -1,36 +1,35 @@
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+    classicBackground,
+    displayDim
+} from './../../helpers/cssValues'
 
-import { Dimensions } from "react-native";
-import React from "react";
+import React from 'react';
 
-const CalendarPage = ({ navigation }) => {
+const CalendarPAge = ({ navigation }) => {
 
-  return (
-    <SafeAreaView>
-      <ScrollView style={styles.main}>
-        <View>
-          <Text>I am CalendarPage</Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
+    return(
+        <>
+        <SafeAreaView style={{backgroundColor: classicBackground}}>
+            <ScrollView style={styles.main}>
+                <View>
+                    <Text>Calendar</Text>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+        </>
+    )
+}  
+ 
 const styles = StyleSheet.create({
-  main: {
-    display: "flex",
-    flexWrap: "nowrap",
-    minWidth: Dimensions.get("window").width,
-    flexDirection: "row",
-    height: Dimensions.get("window").height,
-    backgroundColor: "#fff",
-  },
-});
+    main:{
+      display:'flex',
+      flexWrap:'nowrap',
+      minWidth: displayDim.x,
+      flexDirection:'row',
+      height: displayDim.y,
+      backgroundColor: '#fff'
+    }
+   }); 
 
-export default CalendarPage;
+export default CalendarPAge;

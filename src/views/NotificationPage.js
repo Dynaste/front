@@ -13,7 +13,7 @@ const NotificationPage = ({ navigation }) => {
         <SafeAreaView style={{backgroundColor: classicBackground}}>
             <ScrollView style={styles.main}>
                 <View>
-                    <Text>I am Todos</Text>
+                    <Text>Todos</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
