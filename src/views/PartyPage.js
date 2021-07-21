@@ -10,7 +10,7 @@ const PartyPage = ({ navigation }) => {
       <SafeAreaView style={{ backgroundColor: classicBackground }}>
         <ScrollView style={styles.main}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Mon prochain event</Text>
+            <Text style={styles.title}>Mon prochain évènement</Text>
             <View style={styles.underline}></View>
           </View>
           <View style={styles.centered}>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     marginLeft: distanceBetween2Element/2,
     marginTop: distanceBetween2Element,
-    width: 185,
+    width: 235,
   },
   title: {
     fontSize: 20,

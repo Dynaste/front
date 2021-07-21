@@ -39,10 +39,12 @@ const GroceryTab = ({ navigation }) => {
       paddingRight: distanceBetween2Element/2
     },
     titleContainer: {
-        marginTop: distanceBetween2Element
+        marginTop: distanceBetween2Element,
+        width: 162
     },
     title: {
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: "600",
     },
     underline: {
         backgroundColor: mainColor,

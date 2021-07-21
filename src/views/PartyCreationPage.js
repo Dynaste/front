@@ -14,9 +14,9 @@ import {
 } from "../../helpers/cssValues";
 
 import GroceryTab from "./../components/PartyDetailsComp/GroceryTab";
+import LocationTab from "../components/PartyCreationComp/LocationTab";
 import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
-import ResumeTab from "../components/PartyDetailsComp/ResumeTab";
 import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
@@ -45,13 +45,19 @@ const PartyCreationPage = ({ route, navigation }) => {
                 <Text style={{ fontSize: 16 }}>Annuler</Text>
               </Pressable>
             </View>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Création d'évènement</Text>
+              {/* <View style={styles.underline}></View> */}
+            </View>
             <Tab.Navigator
               initialRouteName="Create location"
               tabBarOptions={{
                 activeTintColor: mainColor,
                 style: {
                   backgroundColor: classicBackground,
-                  margin: distanceBetween2Element / 2,
+                  marginLeft: distanceBetween2Element / 2,
+                  marginRight: distanceBetween2Element / 2,
+                  marginTop: distanceBetween2Element,
                 },
                 indicatorStyle: { backgroundColor: mainColor },
                 iconStyle: { color: mainColor },
@@ -61,7 +67,7 @@ const PartyCreationPage = ({ route, navigation }) => {
             >
               <Tab.Screen
                 name="Create location"
-                component={ResumeTab}
+                component={LocationTab}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <Image
@@ -144,6 +150,21 @@ const PartyCreationPage = ({ route, navigation }) => {
     header: {
       margin: distanceBetween2Element,
     },
+    titleContainer: {
+        marginTop: distanceBetween2Element,
+        marginLeft: distanceBetween2Element/2,
+        width: 206,
+      },
+      title: {
+        fontSize: 20,
+        fontWeight: "600",
+      },
+      underline: {
+        backgroundColor: mainColor,
+        width: "100%",
+        height: 2,
+        marginTop: 4,
+      },
   });
   
   export default PartyCreationPage;
