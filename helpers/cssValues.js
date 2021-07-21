@@ -13,3 +13,5 @@ export const mainColor = "#7F5DF0";
 export const contrastBackground = "#ededed"
 
 export const classicBackground = "#fff"
+
+export const darkBackground = "#585858"

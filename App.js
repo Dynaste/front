@@ -10,6 +10,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CalendarPage from "./src/views/CalendarPage";
 import HomePage from "./src/views/HomePage";
+import Loader from "./src/components/Loader";
 import { NavigationContainer } from "@react-navigation/native";
 import NotificationPage from "./src/views/NotificationPage";
 import { PersistGate } from "redux-persist/integration/react";
@@ -35,10 +36,24 @@ export default function App() {
   const store = createStore(rootReducer);
   const persistor = persistStore(store);
 
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if(isLoading){
+      setTimeout(function () {
+        setIsLoading(false);
+    }, 5000);
+    }
+  }, [isLoading])
+
   return (
     <NavigationContainer>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          {
+            isLoading &&
+              <Loader />
+          }
           <Tab.Navigator
             tabBarOptions={{
               showLabel: false,
@@ -64,7 +79,8 @@ export default function App() {
                     <Image
                       source={require("./assets/home.png")}
                       resizeMode="contain"
-                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
+                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                    />
                   </View>
                 ),
               }}
@@ -78,7 +94,8 @@ export default function App() {
                     <Image
                       source={require("./assets/calendar.png")}
                       resizeMode="contain"
-                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
+                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                    />
                   </View>
                 ),
               }}
@@ -129,7 +146,8 @@ export default function App() {
                     <Image
                       source={require("./assets/archive.png")}
                       resizeMode="contain"
-                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
+                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                    />
                   </View>
                 ),
               }}
@@ -143,7 +161,8 @@ export default function App() {
                     <Image
                       source={require("./assets/profile-user.png")}
                       resizeMode="contain"
-                      style={[styles.icon, {opacity: focused ? 1 : 0.75}]}/>
+                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
+                    />
                   </View>
                 ),
               }}
@@ -180,6 +199,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 25,
     height: 25,
-    tintColor: mainColor
+    tintColor: mainColor,
   },
 });

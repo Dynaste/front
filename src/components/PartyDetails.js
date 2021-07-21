@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: "100%",
-    marginTop: distanceBetween2Element,
-    fontSize: 16
+    fontSize: 16,
+    minHeight: 30,
   },
   icon: {
     width: 25,
