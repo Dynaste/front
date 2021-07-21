@@ -11,13 +11,13 @@ import {
   displayDim,
   distanceBetween2Element,
   mainColor,
-} from "../../helpers/cssValues";
+} from "./../../helpers/cssValues";
 
-import GroceryTab from "./../views/GroceryTab";
-import ParticipantsTab from "./../views/ParticipantsTab";
+import GroceryTab from "./../components/PartyDetailsComp/GroceryTab";
+import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
-import ResumeTab from "./../views/ResumeTab";
-import TasksTab from "./../views/TasksTab";
+import ResumeTab from "./../components/PartyDetailsComp/ResumeTab";
+import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const PartyDetails = ({ route, navigation }) => {

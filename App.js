@@ -3,7 +3,7 @@ import { persistReducer, persistStore } from "redux-persist";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
-import NavigatorPartyCreation from './src/components/NavigatorPartyCreation';
+import NavigatorApp from './src/components/NavigatorApp';
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import React from "react";
@@ -28,7 +28,7 @@ export default function App() {
     <NavigationContainer>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <NavigatorPartyCreation/>
+          <NavigatorApp/>
         </PersistGate>
       </Provider>
     </NavigationContainer>

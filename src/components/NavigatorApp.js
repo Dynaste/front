@@ -3,19 +3,19 @@ import {
   classicBackground,
   contrastBackground,
   mainColor,
-} from "./../../helpers/cssValues";
+} from "../../helpers/cssValues";
 
-import CalendarPage from "./../views/CalendarPage";
-import HomePage from "./../views/HomePage";
-import NotificationPage from "./../views/NotificationPage";
-import PartyCreationPage from "./../views/PartyCreationPage";
-import ProfilPage from "./../views/ProfilPage";
+import CalendarPage from "../views/CalendarPage";
+import HomePage from "../views/HomePage";
+import NotificationPage from "../views/NotificationPage";
+import PartyCreationPage from "../views/PartyCreationPage";
+import ProfilPage from "../views/ProfilPage";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { isLog } from "../../helpers/functions";
 import { useSelector } from "react-redux";
 
-export default function App() {
+export default function NavigatorApp() {
   const Tab = createBottomTabNavigator();
   const identity = useSelector((state) => state.tokenRedux);
 

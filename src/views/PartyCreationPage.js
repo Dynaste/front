@@ -13,11 +13,11 @@ import {
     mainColor,
 } from "../../helpers/cssValues";
 
-import GroceryTab from "./../views/GroceryTab";
-import ParticipantsTab from "./../views/ParticipantsTab";
+import GroceryTab from "./../components/PartyDetailsComp/GroceryTab";
+import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
-import ResumeTab from "./../views/ResumeTab";
-import TasksTab from "./../views/TasksTab";
+import ResumeTab from "../components/PartyDetailsComp/ResumeTab";
+import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const PartyCreationPage = ({ route, navigation }) => {
@@ -42,12 +42,11 @@ const PartyCreationPage = ({ route, navigation }) => {
                     //   tintColor: "#fff", HERE you can change color of the icon
                   }}
                 />
-                <Text style={{ fontSize: 16 }}>Back</Text>
+                <Text style={{ fontSize: 16 }}>Annuler</Text>
               </Pressable>
-              {/* <Text>infoTest: {JSON.stringify(testId)}</Text> HERE it's the way to display a props directly in the route parameter */}
             </View>
             <Tab.Navigator
-              initialRouteName="Feed"
+              initialRouteName="Create location"
               tabBarOptions={{
                 activeTintColor: mainColor,
                 style: {
@@ -61,12 +60,12 @@ const PartyCreationPage = ({ route, navigation }) => {
               }}
             >
               <Tab.Screen
-                name="Resume"
+                name="Create location"
                 component={ResumeTab}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <Image
-                      source={require("./../../assets/list.png")}
+                      source={require("./../../assets/pin.png")}
                       resizeMode="contain"
                       style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
                     />
@@ -74,7 +73,7 @@ const PartyCreationPage = ({ route, navigation }) => {
                 }}
               />
               <Tab.Screen
-                name="Participants"
+                name="Create participants"
                 component={ParticipantsTab}
                 options={{
                   tabBarIcon: ({ focused }) => (
@@ -87,7 +86,7 @@ const PartyCreationPage = ({ route, navigation }) => {
                 }}
               />
               <Tab.Screen
-                name="Tasks list"
+                name="Create tasks list"
                 component={TasksTab}
                 options={{
                   tabBarIcon: ({ focused }) => (
@@ -100,7 +99,7 @@ const PartyCreationPage = ({ route, navigation }) => {
                 }}
               />
               <Tab.Screen
-                name="Grocery list"
+                name="Create grocery list"
                 component={GroceryTab}
                 options={{
                   tabBarIcon: ({ focused }) => (

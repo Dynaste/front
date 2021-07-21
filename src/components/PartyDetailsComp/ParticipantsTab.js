@@ -8,7 +8,7 @@ import {
 import {
     distanceBetween2Element,
     mainColor
-} from './../../helpers/cssValues';
+} from './../../../helpers/cssValues';
 
 import { Dimensions } from "react-native";
 import React from "react";

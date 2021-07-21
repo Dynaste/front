@@ -1,13 +1,10 @@
-import PartyDetails from "../components/PartyDetails";
+import PartyDetails from "./PartyDetails";
 import PartyPage from "./PartyPage";
 import React from "react";
-import { SafeAreaView } from "react-native";
-import { classicBackground } from "./../../helpers/cssValues";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const HomePage = ({ navigation }) => {
   const Stack = createStackNavigator();
-  const [details, setDetails] = React.useState(null);
 
   return (
         <Stack.Navigator

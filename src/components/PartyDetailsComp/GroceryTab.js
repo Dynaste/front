@@ -8,18 +8,18 @@ import {
 import {
     distanceBetween2Element,
     mainColor
-} from './../../helpers/cssValues';
+} from './../../../helpers/cssValues';
 
 import { Dimensions } from "react-native";
 import React from "react";
 
-const TasksTab = ({ navigation }) => {
+const GroceryTab = ({ navigation }) => {
   
     return (
       <SafeAreaView>
         <ScrollView style={styles.main}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Liste de tâches</Text>
+            <Text style={styles.title}>Liste des courses</Text>
             <View style={styles.underline}></View>
           </View>
         </ScrollView>
@@ -52,4 +52,4 @@ const TasksTab = ({ navigation }) => {
     }
   });
   
-  export default TasksTab;
+  export default GroceryTab;

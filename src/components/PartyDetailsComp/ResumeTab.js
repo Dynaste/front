@@ -11,10 +11,10 @@ import {
   displayDim,
   distanceBetween2Element,
   mainColor,
-} from "./../../helpers/cssValues";
+} from './../../../helpers/cssValues';
 
-import BottomInfoParty from "./../components/PartyDetailsComp/BottomInfoParty";
-import MainInfoParty from "./../components/PartyDetailsComp/MainInfoParty";
+import BottomInfoParty from "./BottomInfoParty";
+import MainInfoParty from "./MainInfoParty";
 import React from "react";
 
 const ResumeTab = ({ navigation }) => {
@@ -29,7 +29,7 @@ const ResumeTab = ({ navigation }) => {
           <MainInfoParty />
           <View style={styles.locationContainer}>
             <Image
-              source={require("./../../assets/pin.png")}
+              source={require("./../../../assets/pin.png")}
               resizeMode="contain"
               style={styles.icon}
             />

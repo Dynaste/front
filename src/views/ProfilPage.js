@@ -7,6 +7,7 @@ import {
 import {
   displayDim,
   distanceBetween2Element,
+  mainColor
 } from "../../helpers/cssValues";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -33,7 +34,7 @@ const ProfilPage = ({ navigation }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#7F5DF0",
+            backgroundColor: mainColor,
             width: displayDim.x - 80,
             height: 60,
             marginTop: distanceBetween2Element,
