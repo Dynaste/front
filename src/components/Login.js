@@ -85,11 +85,11 @@ const Login = ({ navigation }) => {
             OU
           </Text>
           <Pressable
-            style={styles.loginButton}
+            style={styles.inscriptionButton}
             onPress={() => setInscription(true)}
           >
             <Text style={{ color: classicBackground, fontSize: 20 }}>
-              J'ai pas encore de compte
+              Je n'ai pas encore de compte
             </Text>
           </Pressable>
         </>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     marginBottom: distanceBetween2Element,
   },
   logInput: {
-    height: 60,
+    height: 50,
     width: "100%",
     textAlign: "center",
     fontSize: 20,
@@ -155,8 +155,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: mainColor,
+    height: 50,
+    marginTop: distanceBetween2Element,
+    padding: distanceBetween2Element/2
+  },
+  inscriptionButton: {
+    borderRadius: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: mainColor,
     width: displayDim.x - 80,
-    height: 60,
+    height: 50,
     marginTop: distanceBetween2Element,
   },
 });
