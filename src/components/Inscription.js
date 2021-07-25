@@ -19,6 +19,7 @@ import {
 
 import React from "react";
 import TextField from "./TextField";
+import { signup } from "../../helpers/api";
 
 const Inscription = ({ navigation, setInscription }) => {
   const [lastname, setLastname] = React.useState("");
@@ -28,6 +29,37 @@ const Inscription = ({ navigation, setInscription }) => {
   const [phone, setPhone] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [password2, setPassword2] = React.useState("");
+
+  const isCompleted = () => {
+    if (
+      password === password2 &&
+      password.length >= 6 &&
+      lastname &&
+      firstname &&
+      email &&
+      pseudo &&
+      phone
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const postInscription = async () => {
+    const body = {
+      lastname: lastname,
+      firstname: firstname,
+      email: email.toLowerCase(),
+      pseudo: pseudo,
+      phone: phone,
+      password: password,
+      notifications: [],
+      profilePicturePath: "",
+    };
+    const res = await signup(body);
+    console.log(res);
+  };
   return (
     <>
       <SafeAreaView style={{ backgroundColor: classicBackground }}>
@@ -107,8 +139,12 @@ const Inscription = ({ navigation, setInscription }) => {
               secureTextEntry={true}
             />
             <Pressable
-              style={styles.button}
-              onPress={() => console.log("Inscription")}
+              style={[
+                styles.button,
+                { backgroundColor: isCompleted() ? mainColor : shadowColor },
+              ]}
+              onPress={() => postInscription()}
+              disabled={isCompleted() ? false : true}
             >
               <Text style={{ color: classicBackground, fontSize: 20 }}>
                 Inscription
@@ -185,7 +221,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: mainColor,
     height: 50,
     marginTop: distanceBetween2Element,
   },
