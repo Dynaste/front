@@ -7,7 +7,7 @@ import {
   mainColor,
 } from "../../helpers/cssValues";
 
-import Inscription from "./Inscription"
+import Inscription from "./Inscription";
 import React from "react";
 import { login } from "../../helpers/api";
 import { useDispatch } from "react-redux";
@@ -50,7 +50,7 @@ const Login = ({ navigation }) => {
                   marginBottom: 1,
                 },
               ]}
-              placeholder="Identifiant"
+              placeholder="email"
               onChangeText={(text) => setEmail(text)}
               value={email}
               autoFocus={false}
@@ -66,7 +66,7 @@ const Login = ({ navigation }) => {
                   borderBottomLeftRadius: borderRadiusValue,
                 },
               ]}
-              placeholder="Mot de passe"
+              placeholder="mot de passe"
               onChangeText={(text) => setPwd(text)}
               value={pwd}
               secureTextEntry={true}
@@ -75,7 +75,11 @@ const Login = ({ navigation }) => {
             <Text style={styles.forgotPasswordTxt}>
               J'ai oublié mon mot de passe
             </Text>
-            <Pressable style={styles.loginButton} onPress={() => postLogin()}>
+            <Pressable
+              style={styles.loginButton}
+              onPress={() => postLogin()}
+              disabled={pwd && email ? false : true}
+            >
               <Text style={{ color: classicBackground, fontSize: 20 }}>
                 Connexion
               </Text>
@@ -94,12 +98,14 @@ const Login = ({ navigation }) => {
           </Pressable>
         </>
       )}
-      {
-        inscription &&
+      {inscription && (
         <>
-          <Inscription navigation={navigation} setInscription={setInscription}/>
+          <Inscription
+            navigation={navigation}
+            setInscription={setInscription}
+          />
         </>
-      }
+      )}
     </>
   );
 };
@@ -157,7 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: mainColor,
     height: 50,
     marginTop: distanceBetween2Element,
-    padding: distanceBetween2Element/2
+    padding: distanceBetween2Element / 2,
   },
   inscriptionButton: {
     borderRadius: 10,

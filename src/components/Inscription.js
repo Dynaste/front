@@ -5,12 +5,14 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from "react-native";
 import {
   borderRadiusValue,
   classicBackground,
   defaultInputSize,
+  defaultSizeText,
   displayDim,
   distanceBetween2Element,
   mainColor,
@@ -22,27 +24,37 @@ import TextField from "./TextField";
 import { signup } from "../../helpers/api";
 
 const Inscription = ({ navigation, setInscription }) => {
+  const [stepper, setStepper] = React.useState(0);
+
   const [lastname, setLastname] = React.useState("");
   const [firstname, setFirstname] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [pseudo, setPseudo] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [password2, setPassword2] = React.useState("");
 
-  const isCompleted = () => {
-    if (
-      password === password2 &&
-      password.length >= 6 &&
-      lastname &&
-      firstname &&
-      email &&
-      pseudo &&
-      phone
-    ) {
-      return true;
-    } else {
-      return false;
+  const isCompleted = (step) => {
+    if (step === 0) {
+      if (lastname && firstname && email && phone) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (step === 1) {
+      if (username) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (step === 2) {
+      if (password === password2 && password.length >= 8) {
+        return true;
+      } else {
+        return false;
+      }
     }
   };
 
@@ -51,7 +63,7 @@ const Inscription = ({ navigation, setInscription }) => {
       lastname: lastname,
       firstname: firstname,
       email: email.toLowerCase(),
-      pseudo: pseudo,
+      username: username,
       phone: phone,
       password: password,
       notifications: [],
@@ -81,75 +93,154 @@ const Inscription = ({ navigation, setInscription }) => {
             </Pressable>
           </View>
           <View style={styles.loginContainer}>
+            {stepper !== 0 && (
+              <View>
+                <Pressable
+                  onPress={() => setStepper(stepper - 1)}
+                  style={styles.previousButton}
+                >
+                  <Image
+                    source={require("./../../assets/left-arrow.png")}
+                    resizeMode="contain"
+                    style={{
+                      width: 18,
+                      height: 18,
+                    }}
+                  />
+                  <Text style={{ fontSize: 14 }}>Etape précedente</Text>
+                </Pressable>
+              </View>
+            )}
+
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Inscription</Text>
             </View>
-            <Text style={styles.label}>Nom de famille</Text>
-            <TextField
-              value={lastname}
-              setValue={setLastname}
-              height={defaultInputSize}
-              placeholder={"Skywalker"}
-            />
-            <Text style={styles.label}>Prénom</Text>
-            <TextField
-              value={firstname}
-              setValue={setFirstname}
-              height={defaultInputSize}
-              placeholder={"Luke"}
-            />
-            <Text style={styles.label}>Pseudo</Text>
-            <TextField
-              value={pseudo}
-              setValue={setPseudo}
-              height={defaultInputSize}
-              placeholder={"Mickey"}
-            />
-            <Text style={styles.label}>Mail</Text>
-            <TextField
-              value={email}
-              setValue={setEmail}
-              height={defaultInputSize}
-              placeholder={"baby_yoda@gmail.com"}
-              type={"email-address"}
-              autoComplete={"email"}
-            />
-            <Text style={styles.label}>Téléphone</Text>
-            <TextField
-              value={phone}
-              setValue={setPhone}
-              height={defaultInputSize}
-              placeholder={"0623456789"}
-              type={"phone-pad"}
-            />
-            <Text style={styles.label}>Mot de passe</Text>
-            <TextField
-              value={password}
-              setValue={setPassword}
-              height={defaultInputSize}
-              placeholder={"abc"}
-              secureTextEntry={true}
-            />
-            <Text style={styles.label}>Confirmation</Text>
-            <TextField
-              value={password2}
-              setValue={setPassword2}
-              height={defaultInputSize}
-              placeholder={"abc"}
-              secureTextEntry={true}
-            />
-            <Pressable
-              style={[
-                styles.button,
-                { backgroundColor: isCompleted() ? mainColor : shadowColor },
-              ]}
-              onPress={() => postInscription()}
-              disabled={isCompleted() ? false : true}
-            >
-              <Text style={{ color: classicBackground, fontSize: 20 }}>
-                Inscription
-              </Text>
-            </Pressable>
+            {stepper === 0 && (
+              <>
+                <Text style={styles.label}>Nom de famille</Text>
+                <TextInput
+                  style={[
+                    styles.inputStyle,
+                    {
+                      borderTopRightRadius: borderRadiusValue,
+                    },
+                  ]}
+                  onChangeText={(text) => setLastname(text)}
+                  value={lastname}
+                  autoFocus={false}
+                  height={defaultInputSize}
+                  placeholder={"Skywalker"}
+                />
+                <Text style={styles.label}>Prénom</Text>
+                <TextInput
+                  style={styles.inputStyle}
+                  onChangeText={(text) => setFirstname(text)}
+                  value={firstname}
+                  autoFocus={false}
+                  height={defaultInputSize}
+                  placeholder={"Luke"}
+                />
+                <Text style={styles.label}>Mail</Text>
+                <TextInput
+                  style={styles.inputStyle}
+                  onChangeText={(text) => setEmail(text)}
+                  value={email}
+                  autoFocus={false}
+                  autoComplete="email"
+                  keyboardType="email-address"
+                  height={defaultInputSize}
+                  placeholder={"baby_yoda@gmail.com"}
+                  type={"email-address"}
+                  autoComplete={"email"}
+                />
+                <Text style={styles.label}>Téléphone</Text>
+                <TextInput
+                  style={[
+                    styles.inputStyle,
+                    {
+                      borderBottomLeftRadius: borderRadiusValue,
+                    },
+                  ]}
+                  onChangeText={(text) => setPhone(text)}
+                  value={phone}
+                  autoFocus={false}
+                  autoComplete="tel"
+                  keyboardType="phone-pad"
+                  height={defaultInputSize}
+                  placeholder={"0623456789"}
+                />
+              </>
+            )}
+
+            {stepper === 1 && (
+              <>
+                <Text style={styles.label}>Pseudo</Text>
+                <TextField
+                  value={username}
+                  setValue={setUsername}
+                  height={defaultInputSize}
+                  placeholder={"Mickey"}
+                />
+              </>
+            )}
+
+            {stepper === 2 && (
+              <>
+                <Text style={styles.label}>Mot de passe</Text>
+                <TextField
+                  value={password}
+                  setValue={setPassword}
+                  height={defaultInputSize}
+                  placeholder={"abc"}
+                  secureTextEntry={true}
+                />
+                <Text style={styles.label}>Confirmation</Text>
+                <TextField
+                  value={password2}
+                  setValue={setPassword2}
+                  height={defaultInputSize}
+                  placeholder={"abc"}
+                  secureTextEntry={true}
+                />
+              </>
+            )}
+            {stepper !== 2 && (
+              <Pressable
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor: isCompleted(stepper)
+                      ? mainColor
+                      : shadowColor,
+                  },
+                ]}
+                onPress={() => setStepper(stepper + 1)}
+                disabled={isCompleted(stepper) ? false : true}
+              >
+                <Text style={{ color: classicBackground, fontSize: 20 }}>
+                  Suivant
+                </Text>
+              </Pressable>
+            )}
+
+            {stepper === 2 && (
+              <Pressable
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor: isCompleted(stepper)
+                      ? mainColor
+                      : shadowColor,
+                  },
+                ]}
+                onPress={() => postInscription()}
+                disabled={isCompleted(stepper) ? false : true}
+              >
+                <Text style={{ color: classicBackground, fontSize: 20 }}>
+                  Inscription
+                </Text>
+              </Pressable>
+            )}
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -174,6 +265,16 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 16,
     minHeight: 30,
+  },
+  previousButton: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "row",
+    width: "100%",
+    fontSize: 14,
+    minHeight: 24,
+    marginBottom: 20
   },
   icon: {
     width: 25,
@@ -211,11 +312,6 @@ const styles = StyleSheet.create({
     marginTop: distanceBetween2Element,
     borderRadius: borderRadiusValue,
   },
-  logInput: {
-    height: 40,
-    textAlign: "center",
-    fontSize: 18,
-  },
   button: {
     borderRadius: 10,
     display: "flex",
@@ -223,6 +319,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 50,
     marginTop: distanceBetween2Element,
+  },
+  inputStyle: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: defaultSizeText,
+    borderWidth: 2,
+    borderColor: mainColor,
   },
 });
 
