@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { ValidateEmail, isPasswordStrong } from "../../helpers/functions";
 import {
   borderRadiusValue,
   classicBackground,
@@ -20,7 +21,6 @@ import {
 } from "../../helpers/cssValues";
 
 import React from "react";
-import TextField from "./TextField";
 import { signup } from "../../helpers/api";
 
 const Inscription = ({ navigation, setInscription }) => {
@@ -36,21 +36,21 @@ const Inscription = ({ navigation, setInscription }) => {
 
   const isCompleted = (step) => {
     if (step === 0) {
-      if (lastname && firstname && email && phone) {
+      if (lastname.length >= 2 && firstname.length >= 2 && ValidateEmail(email) && phone.length === 10) {
         return true;
       } else {
         return false;
       }
     }
     if (step === 1) {
-      if (username) {
+      if (username.length >= 2) {
         return true;
       } else {
         return false;
       }
     }
     if (step === 2) {
-      if (password === password2 && password.length >= 8) {
+      if (password === password2 && isPasswordStrong(password)) {
         return true;
       } else {
         return false;
@@ -175,9 +175,16 @@ const Inscription = ({ navigation, setInscription }) => {
             {stepper === 1 && (
               <>
                 <Text style={styles.label}>Pseudo</Text>
-                <TextField
+                <TextInput
+                  style={[
+                    styles.inputStyle,
+                    {
+                      borderTopRightRadius: borderRadiusValue,
+                    },
+                  ]}
+                  onChangeText={(text) => setUsername(text)}
                   value={username}
-                  setValue={setUsername}
+                  autoFocus={false}
                   height={defaultInputSize}
                   placeholder={"Mickey"}
                 />
@@ -187,20 +194,39 @@ const Inscription = ({ navigation, setInscription }) => {
             {stepper === 2 && (
               <>
                 <Text style={styles.label}>Mot de passe</Text>
-                <TextField
+                <Text style={{marginBottom: 5}}>(8 caractères minimum, 1 majuscule, 1 chiffre)</Text>
+                <TextInput
+                  style={[
+                    styles.inputStyle,
+                    {
+                      borderWidth: 2,
+                      borderColor: mainColor,
+                      borderTopRightRadius: borderRadiusValue,
+                    },
+                  ]}
+                  placeholder="not qwerty"
+                  onChangeText={(text) => setPassword(text)}
                   value={password}
-                  setValue={setPassword}
                   height={defaultInputSize}
-                  placeholder={"abc"}
                   secureTextEntry={true}
+                  autoCorrect={false}
                 />
                 <Text style={styles.label}>Confirmation</Text>
-                <TextField
+                <TextInput
+                  style={[
+                    styles.inputStyle,
+                    {
+                      borderWidth: 2,
+                      borderColor: mainColor,
+                      borderBottomLeftRadius: borderRadiusValue,
+                    },
+                  ]}
+                  placeholder="not qwerty"
+                  onChangeText={(text) => setPassword2(text)}
                   value={password2}
-                  setValue={setPassword2}
                   height={defaultInputSize}
-                  placeholder={"abc"}
                   secureTextEntry={true}
+                  autoCorrect={false}
                 />
               </>
             )}
@@ -274,7 +300,7 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 14,
     minHeight: 24,
-    marginBottom: 20
+    marginBottom: 20,
   },
   icon: {
     width: 25,
