@@ -19,6 +19,10 @@ const ProfilPage = ({ navigation }) => {
   const identity = useSelector((state) => state.tokenRedux);
   const dispatch = useDispatch();
 
+  React.useEffect(() => {
+    console.log(identity)
+  }, [identity])
+
   return (
     <SafeAreaView style={styles.main}>
       {!isLog(identity) ? (

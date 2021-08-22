@@ -24,10 +24,10 @@ const Login = ({ navigation }) => {
       password: pwd,
     };
     const res = await login(body);
-    if (res.data.code === 202) {
+    if (res.data.statusCode === 202) {
       dispatch({
         type: "add_jwt",
-        payload: { jwt: res.data.token, date: Date.now() },
+        payload: { jwt: res.data.data.token, date: Date.now() },
       });
 
       navigation.navigate("Home");
