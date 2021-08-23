@@ -13,21 +13,22 @@ import {
     mainColor,
 } from "../../helpers/cssValues";
 
-// import GroceryTab from "./../components/PartyDetailsComp/GroceryTab";
 import LocationTab from "../components/PartyCreationComp/LocationTab";
 import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
 import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import {useSelector} from "react-redux";
 
 const PartyCreationPage = ({ route, navigation }) => {
     //   const { testId } = route.params;
     const Tab = createMaterialTopTabNavigator();
+    const theme = useSelector((state) => state.themeRedux);
   
     return (
       <>
-        <SafeAreaView style={{ backgroundColor: classicBackground }}>
-          <View style={styles.main}>
+        <SafeAreaView style={{ backgroundColor: theme.background }}>
+          <View style={[styles.main, {backgroundColor: theme.background}]}>
             <View>
               <Pressable
                 onPress={() => navigation.navigate("Home")}
@@ -39,22 +40,21 @@ const PartyCreationPage = ({ route, navigation }) => {
                   style={{
                     width: 20,
                     height: 20,
-                    //   tintColor: "#fff", HERE you can change color of the icon
+                      tintColor: theme.fontColor
                   }}
                 />
-                <Text style={{ fontSize: 16 }}>Annuler</Text>
+                <Text style={{ fontSize: 16, color: theme.fontColor }}>Annuler</Text>
               </Pressable>
             </View>
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Création d'évènement</Text>
-              {/* <View style={styles.underline}></View> */}
+              <Text style={[styles.title, {color: theme.fontColor}]}>Création d'évènement</Text>
             </View>
             <Tab.Navigator
               initialRouteName="Create location"
               tabBarOptions={{
                 activeTintColor: mainColor,
                 style: {
-                  backgroundColor: classicBackground,
+                  backgroundColor: theme.background,
                   marginLeft: distanceBetween2Element / 2,
                   marginRight: distanceBetween2Element / 2,
                   marginTop: distanceBetween2Element,
@@ -104,19 +104,6 @@ const PartyCreationPage = ({ route, navigation }) => {
                   ),
                 }}
               />
-              {/* <Tab.Screen
-                name="Create grocery list"
-                component={GroceryTab}
-                options={{
-                  tabBarIcon: ({ focused }) => (
-                    <Image
-                      source={require("./../../assets/grocery.png")}
-                      resizeMode="contain"
-                      style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
-                    />
-                  ),
-                }}
-              /> */}
             </Tab.Navigator>
           </View>
         </SafeAreaView>
