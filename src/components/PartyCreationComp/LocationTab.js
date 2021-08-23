@@ -15,6 +15,7 @@ import {
 } from "./../../../helpers/cssValues";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
+import MapView from 'react-native-maps';
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -74,6 +75,8 @@ const LocationTab = ({ navigation }) => {
             </Text>
             <View style={styles.underline}></View>
           </View>
+
+          <MapView style={styles.map} />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -134,6 +137,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+  },
+  map: {
+    width: displayDim.x,
+    height: displayDim.y
   },
 });
 
