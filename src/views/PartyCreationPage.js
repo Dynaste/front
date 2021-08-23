@@ -13,7 +13,7 @@ import {
     mainColor,
 } from "../../helpers/cssValues";
 
-import GroceryTab from "./../components/PartyDetailsComp/GroceryTab";
+// import GroceryTab from "./../components/PartyDetailsComp/GroceryTab";
 import LocationTab from "../components/PartyCreationComp/LocationTab";
 import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
@@ -104,7 +104,7 @@ const PartyCreationPage = ({ route, navigation }) => {
                   ),
                 }}
               />
-              <Tab.Screen
+              {/* <Tab.Screen
                 name="Create grocery list"
                 component={GroceryTab}
                 options={{
@@ -116,7 +116,7 @@ const PartyCreationPage = ({ route, navigation }) => {
                     />
                   ),
                 }}
-              />
+              /> */}
             </Tab.Navigator>
           </View>
         </SafeAreaView>

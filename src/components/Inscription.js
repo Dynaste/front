@@ -66,8 +66,8 @@ const Inscription = ({ navigation, setInscription }) => {
       username: username,
       phone: phone,
       password: password,
-      notifications: [],
-      profilePicturePath: "",
+      profilePicturePath: "...",
+      role: "user"
     };
     const res = await signup(body);
     console.log(res);
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     minWidth: displayDim.x,
     minHeight: displayDim.y,
     backgroundColor: classicBackground,
-    padding: distanceBetween2Element / 2,
+    padding: distanceBetween2Element / 2
   },
   backButton: {
     display: "flex",

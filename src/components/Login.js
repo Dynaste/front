@@ -6,13 +6,16 @@ import {
   distanceBetween2Element,
   mainColor,
 } from "../../helpers/cssValues";
+import { useDispatch, useSelector } from "react-redux";
 
 import Inscription from "./Inscription";
 import React from "react";
 import { login } from "../../helpers/api";
-import { useDispatch } from "react-redux";
 
 const Login = ({ navigation }) => {
+
+  const theme = useSelector((state) => state.themeRedux);
+
   const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [inscription, setInscription] = React.useState(false);
@@ -38,8 +41,8 @@ const Login = ({ navigation }) => {
     <>
       {!inscription && (
         <>
-          <View style={styles.loginContainer}>
-            <Text style={styles.title}>LOGIN</Text>
+          <View style={[styles.loginContainer, {backgroundColor: theme.background, shadowColor: theme.shadowColor}]}>
+            <Text style={[styles.title, {color: theme.fontColor}]}>LOGIN</Text>
             <TextInput
               style={[
                 styles.logInput,
@@ -48,9 +51,11 @@ const Login = ({ navigation }) => {
                   borderColor: mainColor,
                   borderTopRightRadius: borderRadiusValue,
                   marginBottom: 1,
+                  color: theme.fontColor
                 },
               ]}
               placeholder="email"
+              placeholderTextColor={theme.fontColor}
               onChangeText={(text) => setEmail(text)}
               value={email}
               autoFocus={false}
@@ -64,15 +69,17 @@ const Login = ({ navigation }) => {
                   borderWidth: 2,
                   borderColor: mainColor,
                   borderBottomLeftRadius: borderRadiusValue,
+                  color: theme.fontColor
                 },
               ]}
               placeholder="mot de passe"
+              placeholderTextColor={theme.fontColor}
               onChangeText={(text) => setPwd(text)}
               value={pwd}
               secureTextEntry={true}
               autoCorrect={false}
             />
-            <Text style={styles.forgotPasswordTxt}>
+            <Text style={[styles.forgotPasswordTxt, { color: theme.blueLink}]}>
               J'ai oublié mon mot de passe
             </Text>
             <Pressable
@@ -85,7 +92,7 @@ const Login = ({ navigation }) => {
               </Text>
             </Pressable>
           </View>
-          <Text style={{ marginTop: distanceBetween2Element, fontSize: 24 }}>
+          <Text style={{ marginTop: distanceBetween2Element, fontSize: 24, color: theme.fontColor }}>
             OU
           </Text>
           <Pressable
@@ -134,8 +141,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: displayDim.x - 40,
-    backgroundColor: "white",
-    shadowColor: "#b0b0b0",
     shadowOffset: {
       width: 0,
       height: 5,
@@ -152,7 +157,6 @@ const styles = StyleSheet.create({
   },
   forgotPasswordTxt: {
     textDecorationLine: "underline",
-    color: "#0a5894",
     marginTop: distanceBetween2Element,
   },
   loginButton: {

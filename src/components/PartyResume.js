@@ -1,21 +1,33 @@
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import {
   borderRadiusValue,
+  classicBackground,
   displayDim,
   distanceBetween2Element,
+  shadowColor,
 } from "../../helpers/cssValues";
 
 import React from "react";
+import { useSelector } from "react-redux";
 
-const PartyResume = ({navigation}) => {
+const PartyResume = ({ navigation }) => {
+  const theme = useSelector((state) => state.themeRedux);
+
   return (
-    <Pressable style={styles.container} onPress={() => navigation.navigate("PartyDetails", {testId: 'Party ID: 1'})}>
+    <Pressable
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.darkMode
+            ? theme.contrastBackground
+            : classicBackground,
+        },
+        (shadowColor: theme.shadowColor),
+      ]}
+      onPress={() =>
+        navigation.navigate("PartyDetails", { testId: "Party ID: 1" })
+      }
+    >
       <View style={styles.pictureContainer}>
         <Image
           source={require("./../../assets/partyPictureDefault.jpeg")}
@@ -32,13 +44,13 @@ const PartyResume = ({navigation}) => {
       </View>
       <View style={styles.users}>
         <View style={styles.owner}>
-          <Text>Creator</Text>
+          <Text style={{ color: theme.fontColor }}>Creator</Text>
         </View>
         <View style={styles.participants}>
-          <Text>Participants</Text>
+          <Text style={{ color: theme.fontColor }}>Participants</Text>
         </View>
       </View>
-      <Text style={styles.title}>Party name</Text>
+      <Text style={[styles.title, { color: theme.fontColor }]}>Party name</Text>
     </Pressable>
   );
 };
@@ -49,8 +61,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: displayDim.x - 40,
-    backgroundColor: "white",
-    shadowColor: "#b0b0b0",
     shadowOffset: {
       width: 0,
       height: 5,
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
     bottom: 15,
   },
   users: {
-    marginTop: distanceBetween2Element/2,
+    marginTop: distanceBetween2Element / 2,
     position: "relative",
     width: "100%",
     height: 30,
@@ -100,12 +110,12 @@ const styles = StyleSheet.create({
   owner: {
     position: "absolute",
     left: 5,
-    top: 5
+    top: 5,
   },
   participants: {
     position: "absolute",
     right: 5,
-    top: 5
+    top: 5,
   },
   title: {
     fontWeight: "bold",

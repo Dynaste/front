@@ -22,12 +22,11 @@ export const login = async(body) => {
 export const signup = async(body) => {
     console.log('SIGNUP');
     console.log(body);
-    // try{
-    //     const response = await axios.post(`${urlDev}/users`, body, headers);
-    //     console.log(response);
-
-    //     return response;
-    // }catch(err){
-    //     return err
-    // }  
+    try{
+        const response = await axios.post(`${urlDev}/users/create`, body, headers);
+        console.log(response)
+        return response;
+    }catch(err){
+        return err
+    }  
 }

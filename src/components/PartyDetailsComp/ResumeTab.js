@@ -8,22 +8,25 @@ import {
 } from "react-native";
 import {
   classicBackground,
+  defaultTextFontWeight,
   displayDim,
   distanceBetween2Element,
-  mainColor,
+  mainColor
 } from './../../../helpers/cssValues';
 
 import BottomInfoParty from "./BottomInfoParty";
 import MainInfoParty from "./MainInfoParty";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ResumeTab = ({ navigation }) => {
+  const theme = useSelector((state) => state.themeRedux);
   return (
     <>
-      <SafeAreaView style={{backgroundColor: classicBackground}}>
-        <ScrollView style={styles.main}>
+      <SafeAreaView style={{backgroundColor: theme.background}}>
+        <ScrollView style={[styles.main, {backgroundColor: theme.background}]}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Résumé</Text>
+            <Text style={[styles.title, {color: theme.fontColor}]}>Résumé</Text>
             <View style={styles.underline}></View>
           </View>
           <MainInfoParty />
@@ -33,7 +36,7 @@ const ResumeTab = ({ navigation }) => {
               resizeMode="contain"
               style={styles.icon}
             />
-            <Text>15 avenue de Vaugirard, 75015, Paris</Text>
+            <Text style={{color: theme.fontColor, fontWeight: defaultTextFontWeight}}>15 avenue de Vaugirard, 75015, Paris</Text>
           </View>
           <BottomInfoParty navigation={navigation} />
         </ScrollView>

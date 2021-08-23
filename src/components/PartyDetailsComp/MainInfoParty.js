@@ -3,12 +3,14 @@ import {
   contrastBackground,
   displayDim,
   distanceBetween2Element,
-  mainColor
 } from "./../../../helpers/cssValues";
 
 import React from "react";
+import { useSelector } from "react-redux";
 
 const MainInfoParty = () => {
+  const theme = useSelector((state) => state.themeRedux);
+
   return (
     <View style={styles.mainInfoContainer}>
       <View style={styles.ownerContainer}></View>

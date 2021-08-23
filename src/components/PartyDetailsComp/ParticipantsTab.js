@@ -1,57 +1,55 @@
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
-import {
-    distanceBetween2Element,
-    mainColor
-} from './../../../helpers/cssValues';
+  distanceBetween2Element,
+  mainColor,
+} from "./../../../helpers/cssValues";
 
 import { Dimensions } from "react-native";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ParticipantsTab = ({ navigation }) => {
-  
-    return (
-      <SafeAreaView>
-        <ScrollView style={styles.main}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Participants</Text>
-            <View style={styles.underline}></View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    );
-  };
-  
-  const styles = StyleSheet.create({
-    main: {
-      display: "flex",
-      flexWrap: "nowrap",
-      minWidth: Dimensions.get("window").width,
-      flexDirection: "row",
-      height: Dimensions.get("window").height,
-      backgroundColor: "#fff",
-      paddingLeft: distanceBetween2Element/2,
-      paddingRight: distanceBetween2Element/2
-    },
-    titleContainer: {
-        marginTop: distanceBetween2Element,
-        width: 113
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: "600",
-    },
-    underline: {
-        backgroundColor: mainColor,
-        width: '100%',
-        height: 2,
-        marginTop: 4
-    }
-  });
-  
-  export default ParticipantsTab;
+  const theme = useSelector((state) => state.themeRedux);
+
+  return (
+    <SafeAreaView>
+      <ScrollView style={[styles.main, { backgroundColor: theme.background }]}>
+        <View style={styles.titleContainer}>
+          <Text style={[styles.title, { color: theme.fontColor }]}>
+            Participants
+          </Text>
+          <View style={styles.underline}></View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  main: {
+    display: "flex",
+    flexWrap: "nowrap",
+    minWidth: Dimensions.get("window").width,
+    flexDirection: "row",
+    height: Dimensions.get("window").height,
+    backgroundColor: "#fff",
+    paddingLeft: distanceBetween2Element / 2,
+    paddingRight: distanceBetween2Element / 2,
+  },
+  titleContainer: {
+    marginTop: distanceBetween2Element,
+    width: 113,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "600",
+  },
+  underline: {
+    backgroundColor: mainColor,
+    width: "100%",
+    height: 2,
+    marginTop: 4,
+  },
+});
+
+export default ParticipantsTab;

@@ -8,6 +8,8 @@ export const defaultSizeText = 20;
 
 export const defaultInputSize = 45;
 
+export const defaultTextFontWeight = "500";
+
 export const displayDim = {x: Dimensions.get("window").width, y: Dimensions.get("window").height};
 
 export const mainColor = "#7F5DF0";

@@ -13,21 +13,22 @@ import {
   mainColor,
 } from "./../../helpers/cssValues";
 
-import GroceryTab from "./../components/PartyDetailsComp/GroceryTab";
 import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
 import ResumeTab from "./../components/PartyDetailsComp/ResumeTab";
 import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import {useSelector} from "react-redux";
 
 const PartyDetails = ({ route, navigation }) => {
   //   const { testId } = route.params;
   const Tab = createMaterialTopTabNavigator();
+  const theme = useSelector((state) => state.themeRedux);
 
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: classicBackground }}>
-        <View style={styles.main}>
+      <SafeAreaView style={{ backgroundColor: theme.background }}>
+        <View style={[styles.main, {backgroundColor: theme.background}]}>
           <View>
             <Pressable
               onPress={() => navigation.navigate("PartyPage")}
@@ -39,10 +40,10 @@ const PartyDetails = ({ route, navigation }) => {
                 style={{
                   width: 20,
                   height: 20,
-                  //   tintColor: "#fff", HERE you can change color of the icon
+                    tintColor: theme.fontColor, 
                 }}
               />
-              <Text style={{ fontSize: 16 }}>Back</Text>
+              <Text style={{ fontSize: 16, color: theme.fontColor }}>Back</Text>
             </Pressable>
             {/* <Text>infoTest: {JSON.stringify(testId)}</Text> HERE it's the way to display a props directly in the route parameter */}
           </View>
@@ -51,7 +52,7 @@ const PartyDetails = ({ route, navigation }) => {
             tabBarOptions={{
               activeTintColor: mainColor,
               style: {
-                backgroundColor: classicBackground,
+                backgroundColor: theme.background,
                 margin: distanceBetween2Element / 2,
               },
               indicatorStyle: { backgroundColor: mainColor },
@@ -99,19 +100,6 @@ const PartyDetails = ({ route, navigation }) => {
                 ),
               }}
             />
-            <Tab.Screen
-              name="Grocery list"
-              component={GroceryTab}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <Image
-                    source={require("./../../assets/grocery.png")}
-                    resizeMode="contain"
-                    style={[styles.icon, { opacity: focused ? 1 : 0.75 }]}
-                  />
-                ),
-              }}
-            />
           </Tab.Navigator>
         </View>
       </SafeAreaView>
@@ -125,7 +113,6 @@ const styles = StyleSheet.create({
     flexWrap: "nowrap",
     minWidth: displayDim.x,
     height: displayDim.y,
-    backgroundColor: classicBackground,
     padding: distanceBetween2Element / 2,
   },
   backButton: {

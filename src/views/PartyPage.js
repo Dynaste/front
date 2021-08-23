@@ -1,16 +1,19 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import { classicBackground, displayDim, distanceBetween2Element, mainColor } from "../../helpers/cssValues";
+import { displayDim, distanceBetween2Element, mainColor } from "../../helpers/cssValues";
 
 import PartyResume from "../components/PartyResume";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const PartyPage = ({ navigation }) => {
+  const theme = useSelector((state) => state.themeRedux);
+
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: classicBackground }}>
-        <ScrollView style={styles.main}>
+      <SafeAreaView style={{ backgroundColor: theme.background }}>
+        <ScrollView style={[styles.main, { backgroundColor: theme.background }]}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Mon prochain évènement</Text>
+            <Text style={[styles.title, {color: theme.fontColor}]}>Mon prochain évènement</Text>
             <View style={styles.underline}></View>
           </View>
           <View style={styles.centered}>
@@ -28,7 +31,6 @@ const styles = StyleSheet.create({
     flexWrap: "nowrap",
     minWidth: displayDim.x,
     height: displayDim.y,
-    backgroundColor: classicBackground,
     paddingLeft: distanceBetween2Element/2,
     paddingRight: distanceBetween2Element/2,
   },

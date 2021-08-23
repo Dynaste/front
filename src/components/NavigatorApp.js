@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 export default function NavigatorApp() {
   const Tab = createBottomTabNavigator();
   const identity = useSelector((state) => state.tokenRedux);
+  const theme = useSelector((state) => state.themeRedux);
 
   return (
     <Tab.Navigator
@@ -29,7 +30,7 @@ export default function NavigatorApp() {
           left: 20,
           right: 20,
           elevation: 0,
-          backgroundColor: contrastBackground,
+          backgroundColor: theme.contrastBackground,
           borderRadius: 15,
           border: "none",
           height: 70,
@@ -141,12 +142,6 @@ export default function NavigatorApp() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: classicBackground,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   shadow: {
     shadowColor: mainColor,
     shadowOffset: {
