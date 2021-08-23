@@ -19,6 +19,10 @@ const PartyPage = ({ navigation }) => {
           <View style={styles.centered}>
             <PartyResume navigation={navigation} />
           </View>
+          <View style={styles.subtitleContainer}>
+            <Text style={[styles.title, {color: theme.fontColor}]}>Mes futurs évènements</Text>
+            <View style={styles.underline}></View>
+          </View>
         </ScrollView>
       </SafeAreaView>
     </>
@@ -38,6 +42,11 @@ const styles = StyleSheet.create({
     marginLeft: distanceBetween2Element/2,
     marginTop: distanceBetween2Element,
     width: 235,
+  },
+  subtitleContainer: {
+    marginLeft: distanceBetween2Element/2,
+    marginTop: distanceBetween2Element,
+    width: 220,
   },
   title: {
     fontSize: 20,
