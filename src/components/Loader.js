@@ -10,11 +10,9 @@ import React from "react";
 const Loader = () => {
   return (
     <>
-    <SafeAreaView style={{backgroundColor: classicBackground}}>
     <View style={styles.container}>
         <Image source={require("./../../assets/lightLoading.gif")}/>
     </View>
-    </SafeAreaView>
     </>
   );
 };
@@ -25,7 +23,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: classicBackground
   }
 });
 

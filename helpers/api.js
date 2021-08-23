@@ -27,6 +27,7 @@ export const signup = async(body) => {
         console.log(response)
         return response;
     }catch(err){
-        return err
+        console.log(err.response.data)
+        return err.response
     }  
 }

@@ -19,12 +19,17 @@ import {
   mainColor,
   shadowColor,
 } from "../../helpers/cssValues";
+import { login, signup } from "../../helpers/api";
+import { useDispatch, useSelector } from "react-redux";
 
 import React from "react";
-import { signup } from "../../helpers/api";
+import { isLoaded } from "expo-font";
 
 const Inscription = ({ navigation, setInscription }) => {
+  const dispatch = useDispatch();
   const [stepper, setStepper] = React.useState(0);
+
+  const theme = useSelector((state) => state.themeRedux);
 
   const [lastname, setLastname] = React.useState("");
   const [firstname, setFirstname] = React.useState("");
@@ -34,9 +39,18 @@ const Inscription = ({ navigation, setInscription }) => {
   const [password, setPassword] = React.useState("");
   const [password2, setPassword2] = React.useState("");
 
+  const [errorMsg, setErrorMsg] = React.useState(null);
+  // const [successMsg, setSuccessMsg] = React.useState(null);
+  const [timer, setTimer] = React.useState(5);
+
   const isCompleted = (step) => {
     if (step === 0) {
-      if (lastname.length >= 2 && firstname.length >= 2 && ValidateEmail(email) && phone.length === 10) {
+      if (
+        lastname.length >= 2 &&
+        firstname.length >= 2 &&
+        ValidateEmail(email) &&
+        phone.length === 10
+      ) {
         return true;
       } else {
         return false;
@@ -67,11 +81,42 @@ const Inscription = ({ navigation, setInscription }) => {
       phone: phone,
       password: password,
       profilePicturePath: "...",
-      role: "user"
+      role: "user",
     };
     const res = await signup(body);
+    setTimer(5)
     console.log(res);
+
+    if (res.status !== 201) {
+      setErrorMsg(res.data.message);
+      
+    } else {
+      const bodyLogin = {
+        email: email.toLowerCase(),
+        password: password,
+      };
+      const res = await login(bodyLogin);
+      if (res.data.statusCode === 202) {
+        dispatch({
+          type: "add_jwt",
+          payload: { jwt: res.data.data.token, date: Date.now() },
+        });
+  
+        navigation.navigate("Home");
+      }
+    }
   };
+
+  React.useEffect(()=>{
+    if(errorMsg){
+      setTimeout(()=>setErrorMsg(null), 5000);
+    }
+  }, [errorMsg])
+
+  React.useEffect(() => {
+    timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
+  }, [timer]);
+
   return (
     <>
       <SafeAreaView style={{ backgroundColor: classicBackground }}>
@@ -194,7 +239,9 @@ const Inscription = ({ navigation, setInscription }) => {
             {stepper === 2 && (
               <>
                 <Text style={styles.label}>Mot de passe</Text>
-                <Text style={{marginBottom: 5}}>(8 caractères minimum, 1 majuscule, 1 chiffre)</Text>
+                <Text style={{ marginBottom: 5 }}>
+                  (8 caractères minimum, 1 majuscule, 1 chiffre)
+                </Text>
                 <TextInput
                   style={[
                     styles.inputStyle,
@@ -268,6 +315,21 @@ const Inscription = ({ navigation, setInscription }) => {
               </Pressable>
             )}
           </View>
+          {errorMsg && (
+            <View style={styles.popupContainer}>
+              <View style={[styles.popup, {backgroundColor: theme.contrastBackground, borderWidth: 2, borderColor: "#E94C2E"}]}>
+                <Text style={{fontSize: 18, textAlign: "center"}}>Error({timer})</Text>
+                <Text style={{fontSize: 18}}>{errorMsg}</Text>
+              </View>
+            </View>
+          )}
+          {/* {successMsg && (
+            <View style={styles.popupContainer}>
+            <View style={[styles.popup, {backgroundColor: theme.contrastBackground, borderWidth: 2, borderColor: "#22DA5A"}]}>
+              <Text style={{fontSize: 18}}>{successMsg}</Text>
+            </View>
+          </View>
+          )} */}
         </ScrollView>
       </SafeAreaView>
     </>
@@ -281,7 +343,7 @@ const styles = StyleSheet.create({
     minWidth: displayDim.x,
     minHeight: displayDim.y,
     backgroundColor: classicBackground,
-    padding: distanceBetween2Element / 2
+    padding: distanceBetween2Element / 2,
   },
   backButton: {
     display: "flex",
@@ -353,6 +415,22 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: mainColor,
   },
+  popup: {
+    fontSize: 26,
+    marginTop: distanceBetween2Element*2,
+    borderRadius: borderRadiusValue,
+    padding: 10,
+  },
+  popupContainer: {
+    width: displayDim.x,
+    height: displayDim.y,
+    position: "absolute",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 5
+  }
 });
 
 export default Inscription;
