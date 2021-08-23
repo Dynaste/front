@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     minWidth: displayDim.x,
     flexDirection: "row",
     height: displayDim.y,
-    backgroundColor: "#fff",
   },
   titleContainer: {
     marginLeft: distanceBetween2Element/2,

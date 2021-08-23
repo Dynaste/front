@@ -11,8 +11,11 @@ import {
 
 import { LocaleConfig } from "react-native-calendars";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const CalendarPAge = ({ navigation }) => {
+  const theme = useSelector((state) => state.themeRedux);
+
   LocaleConfig.locales["fr"] = {
     monthNames: [
       "Janvier",
@@ -43,10 +46,12 @@ const CalendarPAge = ({ navigation }) => {
   LocaleConfig.defaultLocale = "fr";
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: classicBackground }}>
-        <ScrollView style={styles.main}>
+      <SafeAreaView style={{ backgroundColor: theme.background }}>
+        <ScrollView style={[styles.main, { color: theme.background }]}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Mon calendrier</Text>
+            <Text style={[styles.title, { color: theme.fontColor }]}>
+              Mon calendrier
+            </Text>
             <View style={styles.underline}></View>
           </View>
           <View style={styles.calendarContainer}>
@@ -111,7 +116,9 @@ const CalendarPAge = ({ navigation }) => {
             />
           </View>
           <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>Mes prochains évènements</Text>
+            <Text style={[styles.subtitle, { color: theme.fontColor }]}>
+              Mes prochains évènements
+            </Text>
             <View style={styles.underline}></View>
           </View>
         </ScrollView>
@@ -127,7 +134,6 @@ const styles = StyleSheet.create({
     minWidth: displayDim.x,
     flexDirection: "row",
     minHeight: displayDim.y,
-    backgroundColor: "#fff",
   },
   calendarContainer: {
     marginTop: distanceBetween2Element,
