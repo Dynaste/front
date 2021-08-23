@@ -109,7 +109,7 @@ const Inscription = ({ navigation, setInscription }) => {
 
   React.useEffect(()=>{
     if(errorMsg){
-      setTimeout(()=>setErrorMsg(null), 5000);
+      setTimeout(()=>{setErrorMsg(null)}, 5000);
     }
   }, [errorMsg])
 

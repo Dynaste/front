@@ -24,7 +24,7 @@ const PartyCreationPage = ({ route, navigation }) => {
     //   const { testId } = route.params;
     const Tab = createMaterialTopTabNavigator();
     const theme = useSelector((state) => state.themeRedux);
-  
+    
     return (
       <>
         <SafeAreaView style={{ backgroundColor: theme.background }}>

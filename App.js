@@ -7,6 +7,7 @@ import NavigatorApp from './src/components/NavigatorApp';
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import React from "react";
+import partyCreationStore from "./src/reducers/partyCreationReducer";
 import themeReducer from "./src/reducers/themeReducer";
 import tokenReducer from "./src/reducers/tokenReducer";
 
@@ -26,7 +27,8 @@ export default function App() {
 
   const rootReducer = combineReducers({
     tokenRedux: persistedToken,
-    themeRedux: persistedTheme
+    themeRedux: persistedTheme,
+    partyCreationRedux: partyCreationStore
   });
 
   const store = createStore(rootReducer);
