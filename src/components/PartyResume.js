@@ -21,8 +21,8 @@ const PartyResume = ({ navigation }) => {
           backgroundColor: theme.darkMode
             ? theme.contrastBackground
             : classicBackground,
+          shadowColor: theme.shadowColor,
         },
-        (shadowColor: theme.shadowColor),
       ]}
       onPress={() =>
         navigation.navigate("PartyDetails", { testId: "Party ID: 1" })
