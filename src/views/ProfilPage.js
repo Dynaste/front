@@ -17,14 +17,26 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "./../components/Login";
 import React from "react";
 import { isLog } from "./../../helpers/functions";
+import { getLoggedInUser } from "../../helpers/api";
 
 const ProfilPage = ({ navigation }) => {
   const identity = useSelector((state) => state.tokenRedux);
   const theme = useSelector((state) => state.themeRedux);
   const dispatch = useDispatch();
+  const [userDetail, setUser] = React.useState({});
+
+  const init = async (token) => {
+    const user = await getLoggedInUser(token);
+    setUser(user.data);
+    console.log({user});
+  }
 
   React.useEffect(() => {
     console.log(identity);
+
+    if (identity.jwt !== '') {
+      init(identity.jwt);
+    }
   }, [identity]);
 
   return (
