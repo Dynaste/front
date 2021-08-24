@@ -19,7 +19,10 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [inscription, setInscription] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState(null);
+  const [timer, setTimer] = React.useState(5);
   const dispatch = useDispatch();
+
 
   const postLogin = async () => {
     const body = {
@@ -27,6 +30,7 @@ const Login = ({ navigation }) => {
       password: pwd,
     };
     const res = await login(body);
+    console.log(res)
     if (res.data.statusCode === 202) {
       dispatch({
         type: "add_jwt",
@@ -35,7 +39,21 @@ const Login = ({ navigation }) => {
 
       navigation.navigate("Home");
     }
-  };
+    if (res.status !== 201) {
+      setErrorMsg(res.data.message);
+      setTimer(5);
+    }
+  }
+
+  React.useEffect(()=>{
+    if(errorMsg){
+      setTimeout(()=>{setErrorMsg(null)}, 5000);
+    }
+  }, [errorMsg])
+
+  React.useEffect(() => {
+      timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
+  }, [timer]);
 
   return (
     <>
@@ -103,6 +121,15 @@ const Login = ({ navigation }) => {
               Je n'ai pas encore de compte
             </Text>
           </Pressable>
+
+          {errorMsg && (
+            <View style={styles.popupContainer}>
+              <View style={[styles.popup, {backgroundColor: theme.contrastBackground, borderWidth: 2, borderColor: "#E94C2E"}]}>
+                <Text style={{fontSize: 18, textAlign: "center", color: theme.fontColor}}>Error({timer})</Text>
+                <Text style={{fontSize: 18, textAlign: "center", color: theme.fontColor}}>{errorMsg}</Text>
+              </View>
+            </View>
+          )}
         </>
       )}
       {inscription && (
@@ -179,6 +206,23 @@ const styles = StyleSheet.create({
     height: 50,
     marginTop: distanceBetween2Element,
   },
+  popup: {
+    fontSize: 26,
+    borderRadius: borderRadiusValue,
+    width: "98%",
+    padding: 10,
+    marginTop: distanceBetween2Element*2
+  },
+  popupContainer: {
+    width: displayDim.x -20,
+    height: displayDim.y,
+    position: "absolute",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    elevation: 5
+  }
 });
 
 export default Login;
