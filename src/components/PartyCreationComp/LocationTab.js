@@ -59,25 +59,15 @@ const LocationTab = ({ navigation }) => {
   }, [coord]);
 
   React.useEffect(() => {
-    console.log(date);
     dispatch({
       type: "ADD_DATE",
       payload: { date: date },
     });
   }, [date]);
 
-  const nextStep = () => {
-    dispatch({
-      type: "ADD_STEP1",
-      payload: { date: date },
-    });
-    navigation.navigate("Create participants");
-  };
-
   const putMarkerOnMap = async () => {
     if (address) {
       let result = await Location.geocodeAsync(address);
-      console.log(result);
       await setCoord({
         latitude: result[0].latitude,
         longitude: result[0].longitude,
@@ -164,7 +154,6 @@ const LocationTab = ({ navigation }) => {
           </Pressable>
           <MapView
             style={styles.map}
-            onPress={(e) => console.log(e.nativeEvent)}
             showsPointsOfInterest={true}
             region={{
               latitude: coord.latitude,
@@ -243,21 +232,6 @@ const styles = StyleSheet.create({
     width: displayDim.x - 40,
     height: displayDim.y / 4.5,
   },
-  // button: {
-  //   borderRadius: 10,
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   marginTop: distanceBetween2Element,
-  //   padding: 10,
-  // },
-  // buttonContainer: {
-  //   width: "95%",
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
   inputStyle: {
     width: "95%",
     textAlign: "center",

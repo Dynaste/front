@@ -17,13 +17,13 @@ import {
   distanceBetween2Element,
   mainColor,
 } from "./../../../helpers/cssValues";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Dimensions } from "react-native";
 import React from "react";
 import TaskItem from "./TaskItem";
-import { useSelector } from "react-redux";
 
 const TasklistTab = ({ navigation }) => {
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.themeRedux);
 
   const [currentType, setCurrentType] = React.useState("");
@@ -36,11 +36,29 @@ const TasklistTab = ({ navigation }) => {
         task: currentType,
       },
     ]);
+    setCurrentType("");
   };
 
+  React.useEffect(() => {
+    dispatch({
+      type: "ADD_TASKLIST",
+      payload: { tasksList: taskList },
+    });
+  }, [taskList]);
+
+  const deleteItem = (index) => {
+    let newArr = [...taskList];
+    if (index === 0) {
+      newArr.shift();
+      setTaskList(newArr);
+    } else {
+      newArr.splice(index, index);
+      setTaskList(newArr);
+    }
+  };
   return (
     <SafeAreaView>
-      <ScrollView style={[styles.main, { backgroundColor: theme.background }]}>
+      <View style={[styles.main, { backgroundColor: theme.background }]}>
         <View style={styles.titleContainer}>
           <Text style={[styles.title, { color: theme.fontColor }]}>
             Liste de tâches
@@ -87,29 +105,33 @@ const TasklistTab = ({ navigation }) => {
             </Text>
           </Pressable>
         </View>
-        <View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            paddingTop: distanceBetween2Element / 2,
+            maxWidth: displayDim.x - 40,
+            maxHeight: displayDim.y / 2.3,
+          }}
+        >
           {taskList &&
-            taskList.map((item, key) => 
-            <View key={key}>
-                <TaskItem item={item} />
-            </View>
-            )}
-        </View>
-      </ScrollView>
+            taskList.map((item, key) => (
+              <View key={key}>
+                <TaskItem item={item} position={key} deleteItem={deleteItem} />
+              </View>
+            ))}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   main: {
-    display: "flex",
-    flexWrap: "nowrap",
-    minWidth: Dimensions.get("window").width,
-    flexDirection: "row",
-    height: Dimensions.get("window").height,
-    backgroundColor: "#fff",
+    minWidth: displayDim.x,
+    minHeight: displayDim.y,
     paddingLeft: distanceBetween2Element / 2,
     paddingRight: distanceBetween2Element / 2,
+    marginBottom: distanceBetween2Element * 2,
   },
   titleContainer: {
     marginTop: distanceBetween2Element,
