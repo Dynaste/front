@@ -7,7 +7,7 @@ import {
 
 import CalendarPage from "../views/CalendarPage";
 import HomePage from "../views/HomePage";
-import NotificationPage from "../views/NotificationPage";
+import TasksPage from "../views/TasksPage";
 import PartyCreationPage from "../views/PartyCreationPage";
 import ProfilPage from "../views/ProfilPage";
 import React from "react";
@@ -108,8 +108,8 @@ export default function NavigatorApp() {
       )}
 
       <Tab.Screen
-        name="Notifications"
-        component={NotificationPage}
+        name="Tasks"
+        component={TasksPage}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
