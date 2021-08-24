@@ -2,18 +2,9 @@ const initialState = {
     tasks: [],
   };
   
-  function taskStore(state = initialState, action) {
+  const taskReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
-        case "SET_TASKS":
-            console.log({state})
-            if (!payload.tasks || payload.tasks.length === 0) {
-                return initialState;
-            } else {
-                return {
-                    ...state,
-                };
-            }
         case "ADD_TASKS":
             if (payload.tasks && payload.tasks.length > 0) {
                 const tasksList = [...state.tasks, ...payload.tasks];
@@ -44,5 +35,5 @@ const initialState = {
     }
   }
   
-  export default taskStore;
+  export default taskReducer;
   
