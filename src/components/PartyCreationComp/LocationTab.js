@@ -27,7 +27,6 @@ import React from "react";
 
 const LocationTab = ({ navigation }) => {
   const theme = useSelector((state) => state.themeRedux);
-  const newParty = useSelector((state) => state.partyCreationRedux);
   const dispatch = useDispatch();
 
   const [date, setDate] = React.useState(new Date(1635951730000));
@@ -178,27 +177,6 @@ const LocationTab = ({ navigation }) => {
           >
             <Marker coordinate={coord} title={"Position de l'évènement"} />
           </MapView>
-          {/* <View style={styles.buttonContainer}>
-            <Pressable
-              style={[
-                styles.button,
-                {
-                  backgroundColor: mainColor,
-                },
-              ]}
-              onPress={() => nextStep()}
-            >
-              <Text
-                style={{
-                  color: classicBackground,
-                  fontSize: 20,
-                  fontWeight: defaultTextFontWeight,
-                }}
-              >
-                Suivant
-              </Text>
-            </Pressable>
-          </View> */}
         </ScrollView>
       </SafeAreaView>
     </>
@@ -265,21 +243,21 @@ const styles = StyleSheet.create({
     width: displayDim.x - 40,
     height: displayDim.y / 4.5,
   },
-  button: {
-    borderRadius: 10,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: distanceBetween2Element,
-    padding: 10,
-  },
-  buttonContainer: {
-    width: "95%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  // button: {
+  //   borderRadius: 10,
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginTop: distanceBetween2Element,
+  //   padding: 10,
+  // },
+  // buttonContainer: {
+  //   width: "95%",
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
   inputStyle: {
     width: "95%",
     textAlign: "center",
