@@ -17,7 +17,8 @@ import {useDispatch, useSelector} from "react-redux";
 import LocationTab from "../components/PartyCreationComp/LocationTab";
 import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
-import TasksTab from "./../components/PartyDetailsComp/TasksTab";
+import TasklistTab from "../components/PartyCreationComp/TasklistTab";
+// import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const PartyCreationPage = ({ route, navigation }) => {
@@ -101,7 +102,7 @@ const PartyCreationPage = ({ route, navigation }) => {
               />
               <Tab.Screen
                 name="Create tasks list"
-                component={TasksTab}
+                component={TasklistTab}
                 options={{
                   tabBarIcon: ({ focused }) => (
                     <Image
