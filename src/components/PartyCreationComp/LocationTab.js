@@ -27,7 +27,6 @@ import React from "react";
 
 const LocationTab = ({ navigation }) => {
   const theme = useSelector((state) => state.themeRedux);
-  const newParty = useSelector((state) => state.partyCreationRedux);
   const dispatch = useDispatch();
 
   const [date, setDate] = React.useState(new Date(1635951730000));
@@ -60,25 +59,15 @@ const LocationTab = ({ navigation }) => {
   }, [coord]);
 
   React.useEffect(() => {
-    console.log(date);
     dispatch({
       type: "ADD_DATE",
       payload: { date: date },
     });
   }, [date]);
 
-  const nextStep = () => {
-    dispatch({
-      type: "ADD_STEP1",
-      payload: { date: date },
-    });
-    navigation.navigate("Create participants");
-  };
-
   const putMarkerOnMap = async () => {
     if (address) {
       let result = await Location.geocodeAsync(address);
-      console.log(result);
       await setCoord({
         latitude: result[0].latitude,
         longitude: result[0].longitude,
@@ -165,7 +154,6 @@ const LocationTab = ({ navigation }) => {
           </Pressable>
           <MapView
             style={styles.map}
-            onPress={(e) => console.log(e.nativeEvent)}
             showsPointsOfInterest={true}
             region={{
               latitude: coord.latitude,
@@ -178,27 +166,6 @@ const LocationTab = ({ navigation }) => {
           >
             <Marker coordinate={coord} title={"Position de l'évènement"} />
           </MapView>
-          {/* <View style={styles.buttonContainer}>
-            <Pressable
-              style={[
-                styles.button,
-                {
-                  backgroundColor: mainColor,
-                },
-              ]}
-              onPress={() => nextStep()}
-            >
-              <Text
-                style={{
-                  color: classicBackground,
-                  fontSize: 20,
-                  fontWeight: defaultTextFontWeight,
-                }}
-              >
-                Suivant
-              </Text>
-            </Pressable>
-          </View> */}
         </ScrollView>
       </SafeAreaView>
     </>
@@ -264,21 +231,6 @@ const styles = StyleSheet.create({
     marginTop: distanceBetween2Element,
     width: displayDim.x - 40,
     height: displayDim.y / 4.5,
-  },
-  button: {
-    borderRadius: 10,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: distanceBetween2Element,
-    padding: 10,
-  },
-  buttonContainer: {
-    width: "95%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
   },
   inputStyle: {
     width: "95%",
