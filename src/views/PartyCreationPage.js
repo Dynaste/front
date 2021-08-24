@@ -12,24 +12,26 @@ import {
     distanceBetween2Element,
     mainColor,
 } from "../../helpers/cssValues";
+import {useDispatch, useSelector} from "react-redux";
 
 import LocationTab from "../components/PartyCreationComp/LocationTab";
 import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
 import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import {useSelector} from "react-redux";
 
 const PartyCreationPage = ({ route, navigation }) => {
     //   const { testId } = route.params;
     const Tab = createMaterialTopTabNavigator();
     const theme = useSelector((state) => state.themeRedux);
+    const newParty = useSelector((state) => state.partyCreationRedux);
+    const dispatch = useDispatch();
     
     return (
       <>
         <SafeAreaView style={{ backgroundColor: theme.background }}>
           <View style={[styles.main, {backgroundColor: theme.background}]}>
-            <View>
+            <View style={styles.header}>
               <Pressable
                 onPress={() => navigation.navigate("Home")}
                 style={styles.backButton}
@@ -44,6 +46,12 @@ const PartyCreationPage = ({ route, navigation }) => {
                   }}
                 />
                 <Text style={{ fontSize: 16, color: theme.fontColor }}>Annuler</Text>
+              </Pressable>
+              <Pressable
+                onPress={()=> {console.log("WIP POST NEW PARTY")}}
+                style={[styles.backButton, {justifyContent: "flex-end"}]}
+              >
+                <Text style={{ fontSize: 18, fontWeight: "500", color: theme.fontColor }}>Valider</Text>
               </Pressable>
             </View>
             <View style={styles.titleContainer}>
@@ -125,8 +133,7 @@ const PartyCreationPage = ({ route, navigation }) => {
       justifyContent: "flex-start",
       alignItems: "center",
       flexDirection: "row",
-      width: "100%",
-      fontSize: 16,
+      width: "50%",
       minHeight: 30,
     },
     icon: {
@@ -152,6 +159,13 @@ const PartyCreationPage = ({ route, navigation }) => {
         height: 2,
         marginTop: 4,
       },
+      header: {
+        width: "98%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }
   });
   
   export default PartyCreationPage;

@@ -40,32 +40,33 @@ const LocationTab = ({ navigation }) => {
     longitude: 1.693479,
   });
 
-  // const [defaultRegion, setDefaultRegion] = React.useState({
-  //   latitude: 48.52258,
-  //   longitude: 1.693479,
-  //   latitudeDelta: 5,
-  //   longitudeDelta: 5,
-  // });
-
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
   };
 
-  // React.useEffect(() => {
-  //   if (address) {
-  //     const formatAddress = async () => {
-  //       let result = await Location.geocodeAsync(address);
-  //       console.log(result);
-  //       setCoord({
-  //         latitude: result.latitude,
-  //         longitude: result.longitude,
-  //       });
-  //     };
-  //     formatAddress();
-  //   }
-  // }, [address]);
+  React.useEffect(() => {
+    dispatch({
+      type: "ADD_ADDRESS",
+      payload: { address: address },
+    });
+  }, [address]);
+
+  React.useEffect(() => {
+    dispatch({
+      type: "ADD_COORD",
+      payload: { position: coord },
+    });
+  }, [coord]);
+
+  React.useEffect(() => {
+    console.log(date)
+    dispatch({
+      type: "ADD_DATE",
+      payload: { date: date },
+    });
+  }, [date]);
 
   const nextStep = () => {
     dispatch({
@@ -135,6 +136,7 @@ const LocationTab = ({ navigation }) => {
               {
                 borderRadius: borderRadiusValue,
                 color: theme.fontColor,
+                padding: 2,
               },
             ]}
             placeholderTextColor={theme.fontColor}
@@ -142,7 +144,8 @@ const LocationTab = ({ navigation }) => {
             value={address}
             autoFocus={false}
             height={defaultInputSize}
-            placeholder={"Ex: 45 rue de la fontaine 28320 Gallardon"}
+            placeholder={"Ex: 5 rue la fontaine 28320 Gallardon"}
+            placeholderTextColor={"#717171"}
           />
           <Pressable
             style={styles.mapTextContainer}
@@ -152,9 +155,9 @@ const LocationTab = ({ navigation }) => {
           >
             <Text
               style={{
-                color: mainColor,
+                color: theme.blueLink,
                 fontSize: defaultSizeText,
-                fontWeight: "500",
+                fontWeight: "400",
                 textAlign: "center",
               }}
             >
@@ -169,14 +172,14 @@ const LocationTab = ({ navigation }) => {
               latitude: coord.latitude,
               longitude: coord.longitude,
               latitudeDelta: 5,
-              longitudeDelta: 5
+              longitudeDelta: 5,
             }}
             minZoomLevel={12}
             maxZoomLevel={20}
           >
             <Marker coordinate={coord} title={"Position de l'évènement"} />
           </MapView>
-          <View style={styles.buttonContainer}>
+          {/* <View style={styles.buttonContainer}>
             <Pressable
               style={[
                 styles.button,
@@ -196,7 +199,7 @@ const LocationTab = ({ navigation }) => {
                 Suivant
               </Text>
             </Pressable>
-          </View>
+          </View> */}
         </ScrollView>
       </SafeAreaView>
     </>
