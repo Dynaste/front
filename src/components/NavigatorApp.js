@@ -84,7 +84,7 @@ export default function NavigatorApp() {
                   style={[
                     styles.shadow,
                     {
-                      top: -20,
+                      top: -5,
                       backgroundColor: mainColor,
                       borderRadius: "50%",
                       padding: 10,

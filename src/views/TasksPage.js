@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     height: displayDim.y,
   },
   titleContainer: {
-    marginLeft: distanceBetween2Element/2,
+    marginLeft: distanceBetween2Element,
     marginTop: distanceBetween2Element,
     width: 168,
   },

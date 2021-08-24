@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const urlDev = "http://localhost:4000";
+const urlTunnel = "http://127.0.0.1:4000"
 
 const headers = {
     'Content-Type':'application/json'
@@ -15,7 +16,6 @@ export const login = async(body) => {
 
         return response;
     }catch(err){
-        console.log(err.response);
         return err.response
     }    
 }

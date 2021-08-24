@@ -34,7 +34,7 @@ const ProfilPage = ({ navigation }) => {
       ) : (
         <>
           <Text style={{ marginTop: distanceBetween2Element, fontSize: 24, color: theme.fontColor}}>
-            Vous etes connecté
+            Vous êtes connecté
           </Text>
           <Pressable
             style={{

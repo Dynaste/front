@@ -84,11 +84,11 @@ const Inscription = ({ navigation, setInscription }) => {
       role: "user",
     };
     const res = await signup(body);
-    setTimer(5)
     console.log(res);
 
     if (res.status !== 201) {
       setErrorMsg(res.data.message);
+      setTimer(5);
       
     } else {
       const bodyLogin = {
@@ -109,12 +109,12 @@ const Inscription = ({ navigation, setInscription }) => {
 
   React.useEffect(()=>{
     if(errorMsg){
-      setTimeout(()=>setErrorMsg(null), 5000);
+      setTimeout(()=>{setErrorMsg(null)}, 5000);
     }
   }, [errorMsg])
 
   React.useEffect(() => {
-    timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
+      timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
   }, [timer]);
 
   return (
@@ -319,17 +319,10 @@ const Inscription = ({ navigation, setInscription }) => {
             <View style={styles.popupContainer}>
               <View style={[styles.popup, {backgroundColor: theme.contrastBackground, borderWidth: 2, borderColor: "#E94C2E"}]}>
                 <Text style={{fontSize: 18, textAlign: "center"}}>Error({timer})</Text>
-                <Text style={{fontSize: 18}}>{errorMsg}</Text>
+                <Text style={{fontSize: 18, textAlign: "center"}}>{errorMsg}</Text>
               </View>
             </View>
           )}
-          {/* {successMsg && (
-            <View style={styles.popupContainer}>
-            <View style={[styles.popup, {backgroundColor: theme.contrastBackground, borderWidth: 2, borderColor: "#22DA5A"}]}>
-              <Text style={{fontSize: 18}}>{successMsg}</Text>
-            </View>
-          </View>
-          )} */}
         </ScrollView>
       </SafeAreaView>
     </>
@@ -375,6 +368,7 @@ const styles = StyleSheet.create({
   },
   label: {
     marginTop: distanceBetween2Element / 2,
+    fontSize: 15
   },
   underline: {
     backgroundColor: mainColor,
@@ -417,18 +411,18 @@ const styles = StyleSheet.create({
   },
   popup: {
     fontSize: 26,
-    marginTop: distanceBetween2Element*2,
     borderRadius: borderRadiusValue,
+    width: "98%",
     padding: 10,
   },
   popupContainer: {
-    width: displayDim.x,
+    width: displayDim.x -20,
     height: displayDim.y,
     position: "absolute",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     elevation: 5
   }
 });
