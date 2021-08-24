@@ -16,7 +16,6 @@ import {
   classicBackground,
   defaultInputSize,
   defaultSizeText,
-  defaultTextFontWeight,
   displayDim,
   distanceBetween2Element,
   mainColor,
@@ -61,7 +60,7 @@ const LocationTab = ({ navigation }) => {
   }, [coord]);
 
   React.useEffect(() => {
-    console.log(date)
+    console.log(date);
     dispatch({
       type: "ADD_DATE",
       payload: { date: date },
