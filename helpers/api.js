@@ -25,11 +25,9 @@ export const signup = async(body) => {
     console.log(body);
     try{
         const response = await axios.post(`${urlDev}/users/create`, body, headers);
-        console.log(response)
         return response;
     }catch(err){
-        console.log(err.response.data)
-        return err.response
+        return err.response;
     }  
 }
 
@@ -50,5 +48,14 @@ export const getLoggedInUser = async (token) => {
     } catch (err) {
         console.log(err.response);
         return;
+    }
+}
+
+export const searchUser = async (token, body) => {
+    try{
+        const response = await axios.post(`${urlDev}/users`, body, {headers: {"Authorization": token, ...headers}});
+        return response;
+    }catch(err){
+        return err.response;
     }
 }
