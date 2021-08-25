@@ -1,6 +1,6 @@
 import PartyDetails from "./PartyDetails";
 import PartyPage from "./PartyPage";
-import React from "react";
+import React, { useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const HomePage = ({ navigation }) => {

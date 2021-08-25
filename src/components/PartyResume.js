@@ -10,8 +10,9 @@ import {
 import React from "react";
 import { useSelector } from "react-redux";
 
-const PartyResume = ({ navigation }) => {
+const PartyResume = ({ navigation, informations }) => {
   const theme = useSelector((state) => state.themeRedux);
+
 
   return (
     <Pressable
@@ -35,22 +36,22 @@ const PartyResume = ({ navigation }) => {
           style={styles.image}
         />
         <View style={styles.date}>
-          <Text>Date</Text>
+          <Text>{informations.date}</Text>
         </View>
 
-        <View style={styles.progression}>
+        {/* <View style={styles.progression}>
           <Text>Progression</Text>
-        </View>
+        </View> */}
       </View>
       <View style={styles.users}>
         <View style={styles.owner}>
-          <Text style={{ color: theme.fontColor }}>Creator</Text>
+          <Text style={{ color: theme.fontColor }}>{informations.host}</Text>
         </View>
         <View style={styles.participants}>
-          <Text style={{ color: theme.fontColor }}>Participants</Text>
+          <Text style={{ color: theme.fontColor }}>{informations.participants.length} Participants</Text>
         </View>
       </View>
-      <Text style={[styles.title, { color: theme.fontColor }]}>Party name</Text>
+      <Text style={[styles.title, { color: theme.fontColor }]}>{informations.name}</Text>
     </Pressable>
   );
 };

@@ -1,12 +1,26 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { displayDim, distanceBetween2Element, mainColor } from "../../helpers/cssValues";
+import { useSelector } from "react-redux";
+import { getAllParties } from "../../helpers/api";
 
 import PartyResume from "../components/PartyResume";
 import React from "react";
-import { useSelector } from "react-redux";
 
 const PartyPage = ({ navigation }) => {
   const theme = useSelector((state) => state.themeRedux);
+  const token = useSelector(state => state.tokenRedux.jwt);
+  const [parties, setParties] = React.useState([]);
+
+  const init = async () => {
+    const data = await getAllParties(token);
+    setParties(data.data);
+  }
+
+  React.useEffect(() => {
+    if (token) {
+      init();
+    }
+  }, [token])
 
   return (
     <>
@@ -17,11 +31,29 @@ const PartyPage = ({ navigation }) => {
             <View style={styles.underline}></View>
           </View>
           <View style={styles.centered}>
-            <PartyResume navigation={navigation} />
+            <PartyResume 
+              navigation={navigation} 
+              informations={{date: 'Jeudi 11 Mai 2021', host: 'KARCZINSKI Quentin', participants: [], name: 'Crémaillère'}} />
           </View>
           <View style={styles.subtitleContainer}>
             <Text style={[styles.title, {color: theme.fontColor}]}>Mes futurs évènements</Text>
             <View style={styles.underline}></View>
+            {
+              parties.length === 0 && (
+                <View style={styles.centered}>
+                  <Text style={{color: theme.fontColor}}>Vous n'avez aucune soirée de prévue..</Text>
+                </View>
+              )
+            }
+
+            {
+              parties.length > 0 && parties.map((party, id) => (
+                <PartyResume key={id}
+                  navigation={navigation} 
+                  informations={{date: '', host: '', participants: [], name: ''}} />
+              ))
+            }
+
           </View>
         </ScrollView>
       </SafeAreaView>

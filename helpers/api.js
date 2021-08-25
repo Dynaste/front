@@ -5,7 +5,7 @@ const urlTunnel = "http://127.0.0.1:4000"
 
 const headers = {
     'Content-Type':'application/json'
-  }
+}
 
 export const login = async(body) => {
     console.log('LOGIN');
@@ -25,10 +25,37 @@ export const signup = async(body) => {
     console.log(body);
     try{
         const response = await axios.post(`${urlDev}/users/create`, body, headers);
-        console.log(response)
         return response;
     }catch(err){
-        console.log(err.response.data)
-        return err.response
+        return err.response;
     }  
+}
+
+export const getAllParties = async (token) => {
+    try {
+        const response = await axios.get(`${urlDev}/parties`, {headers: {'Authorization': token, ...headers}});
+        return response.data;
+    } catch (err) {
+        console.log(err.response);
+        return;
+    }
+}
+
+export const getLoggedInUser = async (token) => {
+    try {
+        const response = await axios.get(`${urlDev}/user`, {headers: {"Authorization": token, ...headers}})
+        return response.data;
+    } catch (err) {
+        console.log(err.response);
+        return;
+    }
+}
+
+export const searchUser = async (token, body) => {
+    try{
+        const response = await axios.post(`${urlDev}/users`, body, {headers: {"Authorization": token, ...headers}});
+        return response;
+    }catch(err){
+        return err.response;
+    }
 }
