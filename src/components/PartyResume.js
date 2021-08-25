@@ -33,8 +33,8 @@ const PartyResume = ({ navigation, informations }) => {
         <Image
           source={require("./../../assets/partyPictureDefault.jpeg")}
           resizeMode="contain"
-          style={styles.image}
-        />
+          style={styles.image} />
+          
         <View style={styles.date}>
           <Text>{informations.date}</Text>
         </View>
