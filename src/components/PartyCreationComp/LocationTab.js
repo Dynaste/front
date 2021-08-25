@@ -39,7 +39,7 @@ const LocationTab = ({ navigation }) => {
   );
   const dispatch = useDispatch();
 
-  const [date, setDate] = React.useState(new Date(1635951730000));
+  const [date, setDate] = React.useState(new Date(1635949730000));
   const [show, setShow] = React.useState(true);
 
   const [address, setAddress] = React.useState("");
