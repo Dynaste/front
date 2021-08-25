@@ -132,6 +132,7 @@ const LocationTab = ({ navigation }) => {
             value={address}
             autoFocus={false}
             height={defaultInputSize}
+            autoCorrect={false}
             placeholder={"Ex: 5 rue la fontaine 28320 Gallardon"}
             placeholderTextColor={"#717171"}
           />

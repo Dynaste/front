@@ -39,7 +39,7 @@ const Login = ({ navigation }) => {
 
       navigation.navigate("Home");
     }
-    if (res.status !== 201) {
+    if (res.status !== 202) {
       setErrorMsg(res.data.message);
       setTimer(5);
     }
@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
   }, [errorMsg])
 
   React.useEffect(() => {
-      timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
+    timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
   }, [timer]);
 
   return (
@@ -77,6 +77,7 @@ const Login = ({ navigation }) => {
               onChangeText={(text) => setEmail(text)}
               value={email}
               autoFocus={false}
+              autoCorrect={false}
               autoComplete="email"
               keyboardType="email-address"
             />

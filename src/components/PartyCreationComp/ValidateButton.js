@@ -3,17 +3,23 @@ import {
     StyleSheet,
     Text
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
 
 import React from 'react';
+import {createParty} from "./../../../helpers/api";
+import { useSelector } from "react-redux";
 
 const ValidateButton = () => {
 
     const newParty = useSelector((state) => state.partyCreationRedux);
     const theme = useSelector((state) => state.themeRedux);
+    const identity = useSelector((state) => state.tokenRedux);
 
-    const postNewParty = () => {
-        console.log(newParty)
+
+    const postNewParty = async() => {
+        console.log(newParty);
+        console.log(identity.jwt);
+        const response = await createParty(identity.jwt, newParty);
+        console.log(response)
     }
     
     return (

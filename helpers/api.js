@@ -51,11 +51,20 @@ export const getLoggedInUser = async (token) => {
     }
 }
 
-export const searchUser = async (token, body) => {
+export const searchUser = async (searchValue) => {
     try{
-        const response = await axios.post(`${urlDev}/users`, body, {headers: {"Authorization": token, ...headers}});
+        const response = await axios.get(`${urlDev}/users/${searchValue}`, headers);
         return response;
     }catch(err){
+        return err.response;
+    }
+}
+
+export const createParty = async (jwt, body) => {
+    try {
+        const response = await axios.post(`${urlDev}/parties/create`, body, {headers: {"Authorization": jwt, ...headers}})
+        return response;
+    } catch (err) {
         return err.response;
     }
 }

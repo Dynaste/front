@@ -1,24 +1,35 @@
 const initialState = {
   date: new Date(1635951730000),
-  position: "",
-  address: "",
+  location: {
+    x: "",
+    y: "",
+    address: ""
+  },
   tasksList: [],
-  name: ""
+  name: "",
+  guestsList: []
 };
 
 function partyCreationStore(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case "ADD_ADDRESS":
-      return { ...state, address: payload.address };
+      let newLoc = {...state.location};
+      newLoc.address = payload.address;
+      return { ...state, location: newLoc };
     case "ADD_DATE":
       return { ...state, date: payload.date };
     case "ADD_COORD":
-      return { ...state, position: payload.position };
+      let newCoord = {...state.location};
+      newCoord.x = payload.position.latitude+"";
+      newCoord.y = payload.position.longitude+"";
+      return { ...state, location: newCoord };
     case "ADD_TASKLIST":
       return { ...state, tasksList: payload.tasksList };
     case "ADD_NAME":
       return { ...state, name: payload.name };
+    case "ADD_GUESTLIST":
+      return {...state, guestsList: payload.guestsList}
     case "RESET_PARTY":
       return initialState;
 

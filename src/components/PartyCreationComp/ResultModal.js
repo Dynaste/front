@@ -10,8 +10,17 @@ import {
 import React from "react";
 import { useSelector } from "react-redux";
 
-const ResultModal = ({ closeModal, currentType }) => {
+const ResultModal = ({ closeModal, currentType, result, addItem }) => {
   const theme = useSelector((state) => state.themeRedux);
+
+  const validModal = () => {
+    const element = {
+      _id: result.data[0]._id,
+      username: result.data[0].username,
+    };
+    addItem(element);
+    closeModal();
+  };
 
   return (
     <View style={styles.container}>
@@ -30,17 +39,33 @@ const ResultModal = ({ closeModal, currentType }) => {
             </Text>
           </Pressable>
         </View> */}
-        <Text style={[styles.searchTitle, { color: theme.fontColor }]}>
-          {currentType}
-        </Text>
+        {result?.data && result.data[0] ? (
+          <>
+          <Text style={[styles.searchTitle, { color: theme.fontColor }]}>Nous avons trouvé</Text>
+          <Text style={[styles.searchTitle, { color: theme.fontColor }]}>{result.data[0].username}</Text>
+        </>
+        ) : (
+          <>
+            <Text style={[styles.searchTitle, { color: theme.fontColor }]}>Aucun utilisateur trouvé</Text>
+            <Text style={[styles.searchTitle, { color: theme.fontColor }]}>{currentType}</Text>
+          </>
+        )}
         <View style={[styles.buttonContainer]}>
           <View style={styles.buttonC}>
-            <Pressable onPress={() => closeModal()} style={[styles.button, { backgroundColor: "#E94C2E" }]}>
+            <Pressable
+              onPress={() => closeModal()}
+              style={[styles.button, { backgroundColor: "#E94C2E" }]}
+            >
               <Text style={styles.textButton}>Annuler</Text>
             </Pressable>
           </View>
           <View style={styles.buttonC}>
-            <Pressable style={[styles.button, { backgroundColor: mainColor }]}>
+            <Pressable
+              onPress={() => {
+                validModal();
+              }}
+              style={[styles.button, { backgroundColor: mainColor }]}
+            >
               <Text style={styles.textButton}>Ajouter</Text>
             </Pressable>
           </View>
@@ -74,6 +99,7 @@ const styles = StyleSheet.create({
   searchTitle: {
     fontSize: 20,
     fontWeight: "500",
+    marginTop: distanceBetween2Element
   },
   buttonContainer: {
     display: "flex",
@@ -81,6 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
+    marginTop: distanceBetween2Element
   },
   buttonC: {
     width: "45%",

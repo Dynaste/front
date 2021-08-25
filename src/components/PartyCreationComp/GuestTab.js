@@ -28,33 +28,44 @@ const GuestTab = ({ navigation }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.themeRedux);
   const identity = useSelector((state) => state.tokenRedux);
+  const newParty = useSelector((state) => state.partyCreationRedux)
 
   const [currentType, setCurrentType] = React.useState("");
   const [guestList, setGuestList] = React.useState([]);
+  const [result, setResult] = React.useState();
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const addItem = () => {
-    setTaskList([
-      ...guestList,
-      {
-        guest: currentType,
-      },
-    ]);
+  const addItem = (element) => {
+      console.log(element)
+    setGuestList([... guestList, element]);
     setCurrentType("");
   };
 
   const searchItem = async () => {
-    // const res = await searchUser(identity.jwt, currentType);
-    // console.log(res)
+    const res = await searchUser(encodeURIComponent(currentType.toLowerCase()));
+    console.log(res);
+    setResult(res.data)
     setIsOpen(true);
   };
 
-  // React.useEffect(() => {
-  //   dispatch({
-  //     type: "ADD_TASKLIST",
-  //     payload: { tasksList: taskList },
-  //   });
-  // }, [taskList]);
+  React.useEffect(() => {
+      if(guestList.length > 0){
+        let newArr = [];
+        guestList.map((item) => {
+            return newArr.push(item._id)
+        })
+        dispatch({
+           type: "ADD_GUESTLIST",
+           payload: {guestsList: newArr}
+        })
+      }
+      else{
+        dispatch({
+            type: "ADD_GUESTLIST",
+            payload: {guestsList: []}
+         })
+      }
+  }, [guestList]);
 
   const deleteItem = (index) => {
     let newArr = [...guestList];
@@ -75,6 +86,9 @@ const GuestTab = ({ navigation }) => {
     <SafeAreaView>
       <View style={[styles.main, { backgroundColor: theme.background }]}>
         <View style={styles.titleContainer}>
+            <Text style={{color: theme.fontColor, width: displayDim.x -40}}>
+                {JSON.stringify(newParty)}
+            </Text>
           <Text style={[styles.title, { color: theme.fontColor }]}>
             Participants
           </Text>
@@ -97,6 +111,7 @@ const GuestTab = ({ navigation }) => {
             onChangeText={(text) => setCurrentType(text)}
             value={currentType}
             autoFocus={false}
+            autoCorrect={false}
             height={defaultInputSize}
             placeholder={"Ex: Dynaste#000001"}
             placeholderTextColor={"#717171"}
@@ -139,7 +154,7 @@ const GuestTab = ({ navigation }) => {
             ))}
         </ScrollView>
       </View>
-      {isOpen && <ResultModal closeModal={closeModal} currentType={currentType}/>}
+      {isOpen && <ResultModal closeModal={closeModal} currentType={currentType} result={result} addItem={addItem}/>}
     </SafeAreaView>
   );
 };
