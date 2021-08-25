@@ -4,20 +4,17 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from "react-native";
 import {
-  borderRadiusValue,
   classicBackground,
-  defaultInputSize,
   displayDim,
   distanceBetween2Element,
-  mainColor
+  mainColor,
 } from "../../helpers/cssValues";
 import { useDispatch, useSelector } from "react-redux";
 
-// import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
+import EventTitle from "../components/PartyCreationComp/EventTitle";
 import GuestTab from "../components/PartyCreationComp/GuestTab";
 import LocationTab from "../components/PartyCreationComp/LocationTab";
 import React from "react";
@@ -29,28 +26,27 @@ const PartyCreationPage = ({ route, navigation }) => {
   //   const { testId } = route.params;
   const Tab = createMaterialTopTabNavigator();
   const theme = useSelector((state) => state.themeRedux);
+
   const dispatch = useDispatch();
 
-  const [partyName, setPartyName] = React.useState("");
 
-  React.useEffect(() => {
+
+  const backToHome = () => {
     dispatch({
-      type: "ADD_NAME",
-      payload: {
-        name: partyName
-      }
-    }, [partyName])
-  })
+      type: "RESET_PARTY_CREATION",
+      payload: {}
+    })
+    navigation.navigate("Home");
+  };
 
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: theme.background }}>
+      <SafeAreaView
+        style={{ backgroundColor: theme.background }}
+      >
         <View style={[styles.main, { backgroundColor: theme.background }]}>
           <View style={styles.header}>
-            <Pressable
-              onPress={() => navigation.navigate("Home")}
-              style={styles.backButton}
-            >
+            <Pressable onPress={() => backToHome()} style={styles.backButton}>
               <Image
                 source={require("./../../assets/left-arrow.png")}
                 resizeMode="contain"
@@ -64,26 +60,10 @@ const PartyCreationPage = ({ route, navigation }) => {
                 Annuler
               </Text>
             </Pressable>
-            <ValidateButton />
+            <ValidateButton navigation={navigation} />
           </View>
           <View style={styles.titleContainer}>
-            {/* <Text style={[styles.title, {color: theme.fontColor}]}>Création d'évènement</Text> */}
-            <TextInput
-              style={[
-                styles.inputName,
-                {
-                  color: theme.fontColor,
-                  backgroundColor: theme.contrastBackground,
-                },
-              ]}
-              placeholderTextColor={theme.fontColor}
-              onChangeText={(text) => {setPartyName(text)}}
-              value={partyName}
-              autoFocus={false}
-              height={defaultInputSize}
-              placeholder={"Nom de l'évènement"}
-              placeholderTextColor={"#717171"}
-            />
+            <EventTitle />
           </View>
           <Tab.Navigator
             initialRouteName="Create location"
@@ -194,14 +174,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  inputName: {
-    padding: 2,
-    fontSize: 20,
-    width: displayDim.x-40,
-    borderRadius: borderRadiusValue,
-    paddingLeft: 10,
-    paddingRight: 10
-  }
+  
 });
 
 export default PartyCreationPage;

@@ -27,6 +27,16 @@ import React from "react";
 
 const LocationTab = ({ navigation }) => {
   const theme = useSelector((state) => state.themeRedux);
+  const partyDate = useSelector((state) => state.partyCreationRedux.date);
+  const partyAddress = useSelector(
+    (state) => state.partyCreationRedux.location.address
+  );
+  const partyCoordX = useSelector(
+    (state) => state.partyCreationRedux.location.x
+  );
+  const partyCoordY = useSelector(
+    (state) => state.partyCreationRedux.location.y
+  );
   const dispatch = useDispatch();
 
   const [date, setDate] = React.useState(new Date(1635951730000));
@@ -41,36 +51,23 @@ const LocationTab = ({ navigation }) => {
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
-    setDate(currentDate);
-  };
-
-  React.useEffect(() => {
-    dispatch({
-      type: "ADD_ADDRESS",
-      payload: { address: address },
-    });
-  }, [address]);
-
-  React.useEffect(() => {
-    dispatch({
-      type: "ADD_COORD",
-      payload: { position: coord },
-    });
-  }, [coord]);
-
-  React.useEffect(() => {
     dispatch({
       type: "ADD_DATE",
-      payload: { date: date },
+      payload: { date: currentDate },
     });
-  }, [date]);
+  };
 
   const putMarkerOnMap = async () => {
-    if (address) {
-      let result = await Location.geocodeAsync(address);
-      await setCoord({
-        latitude: result[0].latitude,
-        longitude: result[0].longitude,
+    if (partyAddress) {
+      let result = await Location.geocodeAsync(partyAddress);
+      dispatch({
+        type: "ADD_COORD",
+        payload: {
+          position: {
+            latitude: result[0].latitude,
+            longitude: result[0].longitude
+          },
+        },
       });
     }
   };
@@ -94,7 +91,7 @@ const LocationTab = ({ navigation }) => {
             <View style={{ width: "65%", color: "#fff" }}>
               <DateTimePicker
                 testID="dateTimePicker"
-                value={date}
+                value={partyDate}
                 mode={"date"}
                 is24Hour={true}
                 display="default"
@@ -104,7 +101,7 @@ const LocationTab = ({ navigation }) => {
             <View style={{ width: "25%" }}>
               <DateTimePicker
                 testID="dateTimePicker"
-                value={date}
+                value={partyDate}
                 mode={"time"}
                 is24Hour={true}
                 display="default"
@@ -128,12 +125,17 @@ const LocationTab = ({ navigation }) => {
               },
             ]}
             placeholderTextColor={theme.fontColor}
-            onChangeText={(text) => setAddress(text)}
-            value={address}
+            onChangeText={(text) =>
+              dispatch({
+                type: "ADD_ADDRESS",
+                payload: { address: text },
+              })
+            }
+            value={partyAddress}
             autoFocus={false}
             height={defaultInputSize}
             autoCorrect={false}
-            placeholder={"Ex: 5 rue la fontaine 28320 Gallardon"}
+            placeholder={"Ex: 5 rue la fontaine Gallardon"}
             placeholderTextColor={"#717171"}
           />
           <Pressable
@@ -157,15 +159,21 @@ const LocationTab = ({ navigation }) => {
             style={styles.map}
             showsPointsOfInterest={true}
             region={{
-              latitude: coord.latitude,
-              longitude: coord.longitude,
+              latitude: +partyCoordX,
+              longitude: +partyCoordY,
               latitudeDelta: 5,
               longitudeDelta: 5,
             }}
             minZoomLevel={12}
             maxZoomLevel={20}
           >
-            <Marker coordinate={coord} title={"Position de l'évènement"} />
+            <Marker
+              coordinate={{
+                latitude: +partyCoordX,
+                longitude: +partyCoordY,
+              }}
+              title={"Position de l'évènement"}
+            />
           </MapView>
         </ScrollView>
       </SafeAreaView>

@@ -26,34 +26,34 @@ const TasklistTab = ({ navigation }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.themeRedux);
 
+  const partyTasks = useSelector((state) => state.partyCreationRedux.tasksList);
+
   const [currentType, setCurrentType] = React.useState("");
-  const [taskList, setTaskList] = React.useState([]);
 
   const addItem = () => {
-    setTaskList([
-      ...taskList,
-      {
-        content: currentType,
-      },
-    ]);
+    let newArr = [...partyTasks];
+    newArr.push({content: currentType});
+    dispatch({
+      type: "ADD_TASKLIST",
+      payload: { tasksList: newArr },
+    });
     setCurrentType("");
   };
 
-  React.useEffect(() => {
-    dispatch({
-      type: "ADD_TASKLIST",
-      payload: { tasksList: taskList },
-    });
-  }, [taskList]);
-
   const deleteItem = (index) => {
-    let newArr = [...taskList];
+    let newArr = [...partyTasks];
     if (index === 0) {
       newArr.shift();
-      setTaskList(newArr);
+      dispatch({
+        type: "ADD_TASKLIST",
+        payload: { tasksList: newArr },
+      });
     } else {
       newArr.splice(index, index);
-      setTaskList(newArr);
+      dispatch({
+        type: "ADD_TASKLIST",
+        payload: { tasksList: newArr },
+      });
     }
   };
   return (
@@ -114,8 +114,8 @@ const TasklistTab = ({ navigation }) => {
             maxHeight: displayDim.y / 2.3,
           }}
         >
-          {taskList &&
-            taskList.map((item, key) => (
+          {partyTasks &&
+            partyTasks.map((item, key) => (
               <View key={key}>
                 <TaskItem item={item} position={key} deleteItem={deleteItem} />
               </View>

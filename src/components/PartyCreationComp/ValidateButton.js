@@ -8,7 +8,7 @@ import React from 'react';
 import {createParty} from "./../../../helpers/api";
 import { useSelector } from "react-redux";
 
-const ValidateButton = () => {
+const ValidateButton = ({navigation}) => {
 
     const newParty = useSelector((state) => state.partyCreationRedux);
     const theme = useSelector((state) => state.themeRedux);
@@ -18,8 +18,10 @@ const ValidateButton = () => {
     const postNewParty = async() => {
         console.log(newParty);
         console.log(identity.jwt);
+        alert("Evénement créé")
         const response = await createParty(identity.jwt, newParty);
         console.log(response)
+        navigation.navigate("Home");
     }
     
     return (

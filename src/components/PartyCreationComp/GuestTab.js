@@ -27,13 +27,13 @@ import { searchUser } from "../../../helpers/api";
 const GuestTab = ({ navigation }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.themeRedux);
-  const identity = useSelector((state) => state.tokenRedux);
   const newParty = useSelector((state) => state.partyCreationRedux)
 
   const [currentType, setCurrentType] = React.useState("");
   const [guestList, setGuestList] = React.useState([]);
   const [result, setResult] = React.useState();
   const [isOpen, setIsOpen] = React.useState(false);
+
 
   const addItem = (element) => {
       console.log(element)

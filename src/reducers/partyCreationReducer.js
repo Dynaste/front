@@ -1,8 +1,8 @@
 const initialState = {
   date: new Date(1635951730000),
   location: {
-    x: "",
-    y: "",
+    x: "48.52258",
+    y: "1.693479",
     address: ""
   },
   tasksList: [],
@@ -30,7 +30,7 @@ function partyCreationStore(state = initialState, action) {
       return { ...state, name: payload.name };
     case "ADD_GUESTLIST":
       return {...state, guestsList: payload.guestsList}
-    case "RESET_PARTY":
+    case "RESET_PARTY_CREATION":
       return initialState;
 
     default:
