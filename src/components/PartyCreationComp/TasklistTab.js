@@ -61,7 +61,7 @@ const TasklistTab = ({ navigation }) => {
       <View style={[styles.main, { backgroundColor: theme.background }]}>
         <View style={styles.titleContainer}>
           <Text style={[styles.title, { color: theme.fontColor }]}>
-            Liste de tâches
+            Liste des tâches
           </Text>
           <View style={styles.underline}></View>
         </View>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: distanceBetween2Element,
-    width: 141,
+    width: 153,
   },
   title: {
     fontSize: 20,

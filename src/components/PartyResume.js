@@ -39,9 +39,9 @@ const PartyResume = ({ navigation, informations }) => {
           <Text>{informations.date}</Text>
         </View>
 
-        <View style={styles.progression}>
+        {/* <View style={styles.progression}>
           <Text>Progression</Text>
-        </View>
+        </View> */}
       </View>
       <View style={styles.users}>
         <View style={styles.owner}>
