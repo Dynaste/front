@@ -3,13 +3,12 @@ import {
   borderRadiusValue,
   defaultSizeText,
   distanceBetween2Element,
-  mainColor,
 } from "../../../helpers/cssValues";
 
 import React from "react";
 import { useSelector } from "react-redux";
 
-const TaskItem = ({ item, position, deleteItem }) => {
+const GuestItem = ({ item, position, deleteItem }) => {
   const theme = useSelector((state) => state.themeRedux);
 
   return (
@@ -47,18 +46,8 @@ const TaskItem = ({ item, position, deleteItem }) => {
             padding: distanceBetween2Element / 2,
           }}
         >
-          {item.content}
+          {item.username}
         </Text>
-      </View>
-      <View style={styles.userContainer}>
-        <Image
-          style={styles.image}
-          source={
-            theme.darkMode
-              ? require("./../../../assets/outline_person_add_white_24dp.png")
-              : require("./../../../assets/outline_person_add_black_24dp.png")
-          }
-        />
       </View>
     </View>
   );
@@ -89,23 +78,12 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: borderRadiusValue,
   },
   textContainer: {
-    width: "78%",
+    width: "90%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-  },
-  userContainer: {
-    width: "12%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    backgroundColor: mainColor,
-    height: "100%",
-    borderBottomRightRadius: borderRadiusValue,
-    borderTopRightRadius: borderRadiusValue,
   },
 });
 
-export default TaskItem;
+export default GuestItem;

@@ -19,52 +19,70 @@ import {
 } from "./../../../helpers/cssValues";
 import { useDispatch, useSelector } from "react-redux";
 
+import GuestItem from "./GuestItem";
 import React from "react";
-import TaskItem from "./TaskItem";
+import ResultModal from "./ResultModal";
+import { searchUser } from "../../../helpers/api";
 
-const TasklistTab = ({ navigation }) => {
+const GuestTab = ({ navigation }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.themeRedux);
+  const identity = useSelector((state) => state.tokenRedux);
 
   const [currentType, setCurrentType] = React.useState("");
-  const [taskList, setTaskList] = React.useState([]);
+  const [guestList, setGuestList] = React.useState([]);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const addItem = () => {
     setTaskList([
-      ...taskList,
+      ...guestList,
       {
-        content: currentType,
+        guest: currentType,
       },
     ]);
     setCurrentType("");
   };
 
-  React.useEffect(() => {
-    dispatch({
-      type: "ADD_TASKLIST",
-      payload: { tasksList: taskList },
-    });
-  }, [taskList]);
+  const searchItem = async () => {
+    // const res = await searchUser(identity.jwt, currentType);
+    // console.log(res)
+    setIsOpen(true);
+  };
+
+  // React.useEffect(() => {
+  //   dispatch({
+  //     type: "ADD_TASKLIST",
+  //     payload: { tasksList: taskList },
+  //   });
+  // }, [taskList]);
 
   const deleteItem = (index) => {
-    let newArr = [...taskList];
+    let newArr = [...guestList];
     if (index === 0) {
       newArr.shift();
-      setTaskList(newArr);
+      setGuestList(newArr);
     } else {
       newArr.splice(index, index);
-      setTaskList(newArr);
+      setGuestList(newArr);
     }
   };
+
+  const closeModal = () => {
+      setIsOpen(false);
+      setCurrentType("");
+  }
   return (
     <SafeAreaView>
       <View style={[styles.main, { backgroundColor: theme.background }]}>
         <View style={styles.titleContainer}>
           <Text style={[styles.title, { color: theme.fontColor }]}>
-            Liste des tâches
+            Participants
           </Text>
           <View style={styles.underline}></View>
         </View>
+        <Text style={[styles.label, { color: theme.fontColor }]}>
+          Pseudo, email ou téléphone
+        </Text>
         <View style={styles.buttonContainer}>
           <TextInput
             style={[
@@ -80,7 +98,7 @@ const TasklistTab = ({ navigation }) => {
             value={currentType}
             autoFocus={false}
             height={defaultInputSize}
-            placeholder={"Ex: Ramener des chips"}
+            placeholder={"Ex: Dynaste#000001"}
             placeholderTextColor={"#717171"}
           />
           <Pressable
@@ -91,9 +109,8 @@ const TasklistTab = ({ navigation }) => {
               },
             ]}
             onPress={() => {
-              addItem();
+              searchItem();
             }}
-            disabled={currentType ? false : true}
           >
             <Text
               style={{
@@ -102,7 +119,7 @@ const TasklistTab = ({ navigation }) => {
                 fontWeight: defaultTextFontWeight,
               }}
             >
-              Ajouter
+              Chercher
             </Text>
           </Pressable>
         </View>
@@ -114,14 +131,15 @@ const TasklistTab = ({ navigation }) => {
             maxHeight: displayDim.y / 2.3,
           }}
         >
-          {taskList &&
-            taskList.map((item, key) => (
+          {guestList &&
+            guestList.map((item, key) => (
               <View key={key}>
-                <TaskItem item={item} position={key} deleteItem={deleteItem} />
+                <GuestItem item={item} position={key} deleteItem={deleteItem} />
               </View>
             ))}
         </ScrollView>
       </View>
+      {isOpen && <ResultModal closeModal={closeModal} currentType={currentType}/>}
     </SafeAreaView>
   );
 };
@@ -136,7 +154,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: distanceBetween2Element,
-    width: 153,
+    width: 115,
   },
   title: {
     fontSize: 20,
@@ -161,7 +179,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: distanceBetween2Element,
+    marginTop: distanceBetween2Element / 3,
   },
   button: {
     width: "25%",
@@ -172,6 +190,10 @@ const styles = StyleSheet.create({
     padding: 8,
     height: defaultInputSize - 2,
   },
+  label: {
+    marginTop: distanceBetween2Element,
+    fontSize: 16,
+  },
 });
 
-export default TasklistTab;
+export default GuestTab;

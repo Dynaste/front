@@ -17,8 +17,9 @@ import {
 } from "../../helpers/cssValues";
 import { useDispatch, useSelector } from "react-redux";
 
+// import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
+import GuestTab from "../components/PartyCreationComp/GuestTab";
 import LocationTab from "../components/PartyCreationComp/LocationTab";
-import ParticipantsTab from "./../components/PartyDetailsComp/ParticipantsTab";
 import React from "react";
 import TasklistTab from "../components/PartyCreationComp/TasklistTab";
 import ValidateButton from "../components/PartyCreationComp/ValidateButton";
@@ -115,7 +116,7 @@ const PartyCreationPage = ({ route, navigation }) => {
             />
             <Tab.Screen
               name="Create participants"
-              component={ParticipantsTab}
+              component={GuestTab}
               options={{
                 tabBarIcon: ({ focused }) => (
                   <Image
