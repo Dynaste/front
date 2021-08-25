@@ -38,10 +38,11 @@ const PartyPage = ({ navigation }) => {
           <View style={styles.subtitleContainer}>
             <Text style={[styles.title, {color: theme.fontColor}]}>Mes futurs évènements</Text>
             <View style={styles.underline}></View>
-            {
+          </View>
+          {
               parties.length === 0 && (
-                <View style={styles.centered}>
-                  <Text style={{color: theme.fontColor}}>Vous n'avez aucune soirée de prévue..</Text>
+                <View style={[styles.centered, styles.blankContent]}>
+                  <Text style={{color: theme.fontColor, fontSize: 15}}>Vous n'avez aucune soirée prévue</Text>
                 </View>
               )
             }
@@ -53,8 +54,6 @@ const PartyPage = ({ navigation }) => {
                   informations={{date: '', host: '', participants: [], name: ''}} />
               ))
             }
-
-          </View>
         </ScrollView>
       </SafeAreaView>
     </>
@@ -94,6 +93,9 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
+  },
+  blankContent: {
+    height: "100%",
   }
 });
 
