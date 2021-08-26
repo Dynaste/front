@@ -15,7 +15,7 @@ const PartyPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.themeRedux);
   const token = useSelector((state) => state.tokenRedux.jwt);
-  // const parties = useSelector((state) => state.partiesRedux);
+  const partyCreation = useSelector((state) => state.partyCreationRedux);
   const [previousParty, setPreviousParty] = React.useState(null);
   const [nextParty, setNextParty] = React.useState(null);
 
@@ -38,7 +38,11 @@ const PartyPage = ({ navigation }) => {
     if (token) {
       init();
     }
-  }, [token]);
+    else{
+      setNextParty(null);
+      setPreviousParty(null)
+    }
+  }, [token, partyCreation]);
 
   return (
     <>

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import React from "react";
 import moment from "moment";
+import { searchUser } from "./../../helpers/api";
 
 const PartyResume = ({ navigation, party }) => {
   const theme = useSelector((state) => state.themeRedux);
@@ -20,6 +21,20 @@ const PartyResume = ({ navigation, party }) => {
   React.useEffect(() => {
     console.log(token)
   }, []);
+
+  const [ownerName, setOwnerName] = React.useState();
+
+  const getName = async () => {
+    const res = await searchUser(party.hostId);
+    setOwnerName(res.data.data[0].username)
+  }
+
+  React.useEffect(() => {
+    if(party?.hostId){
+      getName();
+    }
+    
+  }, [party])
 
   const redirectToDetails = () => {
     dispatch({
@@ -67,7 +82,7 @@ const PartyResume = ({ navigation, party }) => {
             </View>
             <View style={styles.users}>
               <View style={styles.owner}>
-                <Text style={{ color: theme.fontColor, fontWeight: "500", fontSize: 16 }}>{party?.hostId}</Text>
+                <Text style={{ color: theme.fontColor, fontWeight: "500", fontSize: 16 }}>{ownerName}</Text>
               </View>
               <View style={styles.participants}>
                 <Text style={{ color: theme.fontColor, fontWeight: "500", fontSize: 16 }}>{party?.guestsList?.length} Invité{party?.guestsList?.length > 1 && "s"}</Text>

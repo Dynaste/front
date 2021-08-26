@@ -255,6 +255,7 @@ const Inscription = ({ navigation, setInscription }) => {
                   autoFocus={false}
                   height={defaultInputSize}
                   placeholder={"Mickey"}
+                  autoCorrect={false}
                 />
               </>
             )}
