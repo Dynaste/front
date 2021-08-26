@@ -174,6 +174,7 @@ const Inscription = ({ navigation, setInscription }) => {
 
             <View style={styles.titleContainer}>
               <Text style={[styles.title, {color: theme.fontColor}]}>Inscription</Text>
+              <View style={styles.underline}></View>
             </View>
             {stepper === 0 && (
               <>
@@ -408,12 +409,12 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   label: {
-    marginTop: distanceBetween2Element / 2,
+    marginTop: distanceBetween2Element,
     fontSize: 16,
   },
   underline: {
     backgroundColor: mainColor,
-    width: "100%",
+    width: 100,
     height: 2,
     marginTop: 4,
   },
