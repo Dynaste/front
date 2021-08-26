@@ -4,55 +4,63 @@ import {
   classicBackground,
   displayDim,
   distanceBetween2Element,
-  shadowColor,
 } from "../../helpers/cssValues";
 
 import React from "react";
 import { useSelector } from "react-redux";
 
-const PartyResume = ({ navigation, informations }) => {
+const PartyResume = ({ navigation, party }) => {
   const theme = useSelector((state) => state.themeRedux);
 
-
   return (
-    <Pressable
-      style={[
-        styles.container,
-        {
-          backgroundColor: theme.darkMode
-            ? theme.contrastBackground
-            : classicBackground,
-          shadowColor: theme.shadowColor,
-        },
-      ]}
-      onPress={() =>
-        navigation.navigate("PartyDetails", { testId: "Party ID: 1" })
+    <>
+      {
+        !party && (
+          <View style={styles.blankContent}>
+            <Text style={{color: 'lightgrey', fontSize: 15}}>Vous n'avez aucune soirée prévue</Text>
+          </View>
+        )
       }
-    >
-      <View style={styles.pictureContainer}>
-        <Image
-          source={require("./../../assets/partyPictureDefault.jpeg")}
-          resizeMode="contain"
-          style={styles.image} />
-          
-        <View style={styles.date}>
-          <Text>{informations.date}</Text>
-        </View>
 
-        {/* <View style={styles.progression}>
-          <Text>Progression</Text>
-        </View> */}
-      </View>
-      <View style={styles.users}>
-        <View style={styles.owner}>
-          <Text style={{ color: theme.fontColor }}>{informations.host}</Text>
-        </View>
-        <View style={styles.participants}>
-          <Text style={{ color: theme.fontColor }}>{informations.participants.length} Participants</Text>
-        </View>
-      </View>
-      <Text style={[styles.title, { color: theme.fontColor }]}>{informations.name}</Text>
-    </Pressable>
+      {
+        party && (
+          <Pressable
+            style={[
+              styles.container,
+              {
+                backgroundColor: theme.darkMode
+                  ? theme.contrastBackground
+                  : classicBackground,
+                shadowColor: theme.shadowColor,
+              },
+            ]}
+            onPress={() =>
+              navigation.navigate("PartyDetails", { testId: "Party ID: 1" })
+            }>
+
+            <View style={styles.pictureContainer}>
+              <Image
+                source={require("./../../assets/partyPictureDefault.jpeg")}
+                resizeMode="contain"
+                style={styles.image} />
+
+              <View style={styles.date}>
+                <Text>{party?.date}</Text>
+              </View>
+            </View>
+            <View style={styles.users}>
+              <View style={styles.owner}>
+                <Text style={{ color: theme.fontColor }}>{party?.username}</Text>
+              </View>
+              <View style={styles.participants}>
+                <Text style={{ color: theme.fontColor }}>{party?.guestsList?.length} Participants</Text>
+              </View>
+            </View>
+            <Text style={[styles.title, { color: theme.fontColor }]}>{party?.name}</Text>
+          </Pressable>
+        )
+      }
+    </>
   );
 };
 

@@ -11,6 +11,7 @@ import partyCreationStore from "./src/reducers/partyCreationReducer";
 import themeReducer from "./src/reducers/themeReducer";
 import tokenReducer from "./src/reducers/tokenReducer";
 import taskReducer from "./src/reducers/taskReducer";
+import partyReducer from "./src/reducers/partyReducer";
 
 export default function App() {
 
@@ -29,15 +30,22 @@ export default function App() {
     storage: AsyncStorage
   }
 
+  const partiesPersisConfig = {
+    key: "root4",
+    storage: AsyncStorage
+  } 
+
   const persistedToken = persistReducer(tokenPersistConfig, tokenReducer);
   const persistedTheme = persistReducer(themePersistConfig, themeReducer);
   const persistedTasks = persistReducer(taskPersistConfig, taskReducer);
+  const persistedParties = persistReducer(partiesPersisConfig, partyReducer);
 
   const rootReducer = combineReducers({
     tokenRedux: persistedToken,
     themeRedux: persistedTheme,
     partyCreationRedux: partyCreationStore,
-    taskRedux: persistedTasks
+    taskRedux: persistedTasks,
+    partiesRedux: persistedParties
   });
 
   const store = createStore(rootReducer);

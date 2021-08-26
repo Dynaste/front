@@ -25,11 +25,20 @@ const ProfilPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const [userDetail, setUser] = React.useState({});
 
+  const parties = useSelector(state => state.partiesRedux)
+
   const init = async (token) => {
     const user = await getLoggedInUser(token);
     setUser(user.data);
     console.log({ user });
   };
+
+  const logout = () => {
+    dispatch({ type: "reset_jwt", payload: {} });
+    dispatch({ type: "RESET_PARTIES", payload: {} });
+
+    console.log({parties})
+  }
 
   React.useEffect(() => {
     console.log(identity);
@@ -109,7 +118,7 @@ const ProfilPage = ({ navigation }) => {
               height: 60,
               marginTop: distanceBetween2Element,
             }}
-            onPress={() => dispatch({ type: "reset_jwt", payload: {} })}
+            onPress={() => logout()}
           >
             <Text
               style={{
