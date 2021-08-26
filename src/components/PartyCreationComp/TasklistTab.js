@@ -82,6 +82,7 @@ const TasklistTab = ({ navigation }) => {
             height={defaultInputSize}
             placeholder={"Ex: Ramener des chips"}
             placeholderTextColor={"#717171"}
+            autoCorrect={false}
           />
           <Pressable
             style={[

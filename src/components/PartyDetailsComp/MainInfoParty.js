@@ -44,7 +44,7 @@ const MainInfoParty = ({ party }) => {
         ]}
       >
         <Text style={{color: theme.fontColor ,textAlign: "center", fontSize: 15, fontWeight: "500"}}>
-        {moment().locale("fr").format('DD MMMM - HH:MM', party.date)}
+        {moment( party.date).locale("fr").format('DD MMM - HH:MM')}
         </Text>
       </View>
     </View>

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const TaskList = () => {
   // const parties = useSelector(state => state.partiesRedux);
-  const [taskList, setTaskList] = React.useState([]);
   const theme = useSelector((state) => state.themeRedux);
 
   const generateList = (list = []) => {
