@@ -76,15 +76,14 @@ export const getNearParty = (parties, type = 'incoming') => {
         parties.forEach(p => {
             const current = new Date(p.date).getTime();
             if (type === 'incoming') {
-                console.log(p)
                 if (current > Date.now()) {
-                    if (!last || current < new Date(p.date).getTime()) {
+                    if (!last || new Date(last.date) > new Date(p.date).getTime()) {
                         last = {...p};
                     }
                 }
             } else if (type === 'previous') {
                 if (current < Date.now()) {
-                    if (!last || current > new Date(p.date).getTime()) {
+                    if (!last || new Date(last.date) < new Date(p.date).getTime()) {
                         last = {...p};
                     }
                 }
