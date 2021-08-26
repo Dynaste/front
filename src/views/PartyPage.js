@@ -1,24 +1,43 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { displayDim, distanceBetween2Element, mainColor } from "../../helpers/cssValues";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAllParties } from "../../helpers/api";
+import { filterParties } from "../../helpers/functions";
 
 import PartyResume from "../components/PartyResume";
 import React from "react";
 
 const PartyPage = ({ navigation }) => {
+  const dispatch = useDispatch()
   const theme = useSelector((state) => state.themeRedux);
   const token = useSelector(state => state.tokenRedux.jwt);
-  const [parties, setParties] = React.useState([]);
+  const parties = useSelector(state => state.partiesRedux);
+  const [previousParty, setPreviousParty] = React.useState(null);
+  const [nextParty, setNextParty] = React.useState(null);
 
   const init = async () => {
-    const data = await getAllParties(token);
-    setParties(data.data);
+    const res = await getAllParties(token);
+    const filteredParties = filterParties(res.data);
+    dispatch({type: 'ADD_PARTY', payload: {parties: {...filteredParties}} })
   }
 
   React.useEffect(() => {
     if (token) {
-      init();
+      (async () => {
+        await init();
+      })();
+
+      if (parties && parties.length > 0) {
+
+        const dataPrevious = getNearParty(parties.previous, 'previous');
+        const dataIncoming = getNearParty(parties.incoming, 'incoming');
+
+        console.log({dataPrevious})
+        console.log({dataIncoming})
+
+        dataPrevious && setPreviousParty({...data});
+        dataIncoming && setNextParty({...data});
+      }
     }
   }, [token])
 
@@ -32,28 +51,18 @@ const PartyPage = ({ navigation }) => {
           </View>
           <View style={styles.centered}>
             <PartyResume 
-              navigation={navigation} 
-              informations={{date: 'Jeudi 11 Mai 2021', host: 'KARCZINSKI Quentin', participants: [], name: 'Crémaillère'}} />
+              navigation={navigation}
+              party={{...nextParty}} />
           </View>
           <View style={styles.subtitleContainer}>
-            <Text style={[styles.title, {color: theme.fontColor}]}>Mes futurs évènements</Text>
+            <Text style={[styles.title, {color: theme.fontColor}]}>Mes anciens évènements</Text>
             <View style={styles.underline}></View>
           </View>
-          {
-              parties.length === 0 && (
-                <View style={[styles.centered, styles.blankContent]}>
-                  <Text style={{color: theme.fontColor, fontSize: 15}}>Vous n'avez aucune soirée prévue</Text>
-                </View>
-              )
-            }
-
-            {
-              parties.length > 0 && parties.map((party, id) => (
-                <PartyResume key={id}
-                  navigation={navigation} 
-                  informations={{date: '', host: '', participants: [], name: ''}} />
-              ))
-            }
+          <View style={styles.centered}>
+            <PartyResume
+              navigation={navigation} 
+              party={{...previousParty}} />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </>
@@ -77,7 +86,7 @@ const styles = StyleSheet.create({
   subtitleContainer: {
     marginLeft: distanceBetween2Element/2,
     marginTop: distanceBetween2Element,
-    width: 220,
+    width: 235,
   },
   title: {
     fontSize: 20,
@@ -92,10 +101,11 @@ const styles = StyleSheet.create({
   centered: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    minHeight: displayDim.y-600
   },
   blankContent: {
-    height: "100%",
+    height: displayDim.y-525,
   }
 });
 

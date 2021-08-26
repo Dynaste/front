@@ -40,3 +40,59 @@ export const isPasswordStrong = (pwd) => {
     }
     return false
 }
+
+export const refactObjectToArrayResponseApi = (data = {}) => {
+    let arr = []
+    Object.keys(data).filter(item => {
+        return item !== '_options';
+    }).forEach(i => {
+        arr.push(data[i]);
+    })
+    return arr;
+} 
+
+export const filterParties = (data) => {
+    const obj = {incoming: [], previous: []};
+    const arr = refactObjectToArrayResponseApi(data);
+    arr.forEach((party) => {
+        if (new Date(party.date).getTime() > Date.now()) {
+            obj.incoming.push({...party});
+            obj.incoming = obj.incoming.sort((a, b) => {
+                return new Date(a.date).getTime() < new Date(b.date).getTime();
+            });
+        } else if (new Date(party.date).getTime() < Date.now()) {
+            obj.previous.push({...party});
+            obj.previous = obj.previous.sort((a, b) => {
+                return new Date(a.date).getTime() > new Date(b.date).getTime();
+            });
+        }
+    });
+    return obj;
+}
+
+export const getNearParty = (parties, type = 'incoming') => {
+    try {
+        let last = null;
+        parties.forEach(p => {
+            const current = new Date(p.date).getTime();
+            if (type === 'incoming') {
+                if (current < Date.now()) {
+                    if (!last || current < new Date(last.date).getTime()) {
+                        last = {...p};
+                    }
+                }
+            } else if (type === 'previous') {
+                if (current > Date.now()) {
+                    if (!last || current > new Date(last.date).getTime()) {
+                        last = {...p};
+                    }
+                }
+            } else {
+                throw "Wrong type, you have to choose: 'incoming' or 'previous'.";
+            }
+        })
+        setParty({...last});
+    } catch (err) {
+        console.warn({err});
+    }
+}
