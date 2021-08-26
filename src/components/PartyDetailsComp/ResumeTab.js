@@ -31,7 +31,7 @@ const ResumeTab = ({ navigation }) => {
             <Text style={[styles.title, {color: theme.fontColor}]}>Résumé</Text>
             <View style={styles.underline}></View>
           </View>
-          <MainInfoParty />
+          <MainInfoParty party={party.current}/>
           <View style={styles.locationContainer}>
             <Image
               source={require("./../../../assets/pin.png")}

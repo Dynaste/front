@@ -12,17 +12,6 @@ import React from "react";
 const BottomInfoParty = ({navigation, party}) => {
   return (
     <View style={styles.container}>
-      {/* <Pressable style={styles.infoContainer} onPress={() => navigation.navigate("Participants")}>
-        <View>
-          <Text>
-            Invité{party.guestsList.length > 1 && "s"}: 
-          </Text>
-          <Text>
-            {party.guestsList.length}
-          </Text>
-        </View>
-      </Pressable>
-      <Pressable style={styles.infoContainer} onPress={() => navigation.navigate("Tasks list")}></Pressable> */}
       <MapView
             style={styles.map}
             showsPointsOfInterest={true}
@@ -64,7 +53,6 @@ const styles = StyleSheet.create({
     marginBottom: distanceBetween2Element
   },
   map: {
-    marginTop: distanceBetween2Element,
     width: displayDim.x - 40,
     height: displayDim.y / 4.5,
   },

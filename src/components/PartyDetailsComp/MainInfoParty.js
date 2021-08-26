@@ -1,4 +1,6 @@
-import { StyleSheet, View } from "react-native";
+import 'moment/locale/fr'
+
+import { StyleSheet, Text, View } from "react-native";
 import {
   contrastBackground,
   displayDim,
@@ -6,16 +8,45 @@ import {
 } from "./../../../helpers/cssValues";
 
 import React from "react";
+import moment from "moment";
+import { searchUser } from "./../../../helpers/api";
 import { useSelector } from "react-redux";
 
-const MainInfoParty = () => {
+const MainInfoParty = ({ party }) => {
   const theme = useSelector((state) => state.themeRedux);
+  const [hostName, setHostName] = React.useState();
+
+  const getName = async () => {
+    const res = await searchUser(party.hostId);
+    console.log(res);
+    setHostName(res.data.data[0].username)
+  }
+
+  React.useEffect(() => {
+    getName();
+  }, [party])
 
   return (
     <View style={styles.mainInfoContainer}>
-      <View style={styles.ownerContainer}></View>
+      <View
+        style={[
+          styles.ownerContainer,
+          { backgroundColor: theme.contrastBackground },
+        ]}
+      >
+        <Text style={{color: theme.fontColor ,textAlign: "center", fontSize: 15, fontWeight: "500"}}>{hostName}</Text>
+      </View>
       <View style={styles.mainSeparator}></View>
-      <View style={styles.dateContainer}></View>
+      <View
+        style={[
+          styles.dateContainer,
+          { backgroundColor: theme.contrastBackground },
+        ]}
+      >
+        <Text style={{color: theme.fontColor ,textAlign: "center", fontSize: 15, fontWeight: "500"}}>
+        {moment().locale("fr").format('DD MMMM - HH:MM', party.date)}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -29,8 +60,10 @@ const styles = StyleSheet.create({
   },
   ownerContainer: {
     height: 60,
-    width: "63%",
-    backgroundColor: contrastBackground,
+    width: "53%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 0,
@@ -41,13 +74,16 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     height: 60,
-    width: "33%",
+    width: "43%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: contrastBackground,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 0,
-  }
+  },
 });
 
 export default MainInfoParty;

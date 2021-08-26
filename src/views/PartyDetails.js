@@ -46,6 +46,11 @@ const PartyDetails = ({ route, navigation }) => {
               <Text style={{ fontSize: 16, color: theme.fontColor }}>Back</Text>
             </Pressable>
           </View>
+          <View style={{with: "100%", display: "flex" ,alignItems: "center", flexDirection: "row", justifyContent: "center"}}>
+            <Text style={{color: theme.fontColor, fontSize: 20, fontWeight: "600"}}>
+                {party.name}
+            </Text>
+          </View>
           <Tab.Navigator
             initialRouteName="Feed"
             tabBarOptions={{

@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     width: "90%",
-    height: "50%",
+    height: "25%",
     position: "relative",
   },
   searchTitle: {
