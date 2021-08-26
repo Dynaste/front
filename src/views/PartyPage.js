@@ -37,10 +37,9 @@ const PartyPage = ({ navigation }) => {
   React.useEffect(() => {
     if (token) {
       init();
-    }
-    else{
+    } else {
       setNextParty(null);
-      setPreviousParty(null)
+      setPreviousParty(null);
     }
   }, [token, partyCreation]);
 

@@ -15,12 +15,7 @@ import { searchUser } from "./../../helpers/api";
 
 const PartyResume = ({ navigation, party }) => {
   const theme = useSelector((state) => state.themeRedux);
-  const token = useSelector((state) => state.tokenRedux.jwt);
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    console.log(token)
-  }, []);
 
   const [ownerName, setOwnerName] = React.useState();
 
@@ -77,7 +72,7 @@ const PartyResume = ({ navigation, party }) => {
                 style={styles.image} />
 
               <View style={styles.date}>
-                <Text>{moment().locale("fr").format('DD MMMM', party?.date)}</Text>
+                <Text>{moment(party?.date).locale("fr").format('DD MMMM')}</Text>
               </View>
             </View>
             <View style={styles.users}>
