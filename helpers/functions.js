@@ -76,14 +76,15 @@ export const getNearParty = (parties, type = 'incoming') => {
         parties.forEach(p => {
             const current = new Date(p.date).getTime();
             if (type === 'incoming') {
-                if (current < Date.now()) {
-                    if (!last || current < new Date(last.date).getTime()) {
+                console.log(p)
+                if (current > Date.now()) {
+                    if (!last || current < new Date(p.date).getTime()) {
                         last = {...p};
                     }
                 }
             } else if (type === 'previous') {
-                if (current > Date.now()) {
-                    if (!last || current > new Date(last.date).getTime()) {
+                if (current < Date.now()) {
+                    if (!last || current > new Date(p.date).getTime()) {
                         last = {...p};
                     }
                 }
@@ -91,7 +92,7 @@ export const getNearParty = (parties, type = 'incoming') => {
                 throw "Wrong type, you have to choose: 'incoming' or 'previous'.";
             }
         })
-        setParty({...last});
+        return {...last};
     } catch (err) {
         console.warn({err});
     }

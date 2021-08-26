@@ -1,7 +1,7 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View, CheckBox } from "react-native";
+import { CheckBox, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, {useEffect, useState} from "react";
 import { displayDim, distanceBetween2Element, mainColor } from "../../helpers/cssValues";
 
-import React, {useEffect, useState} from "react";
 import { useSelector } from "react-redux";
 
 const TaskList = () => {
@@ -21,7 +21,7 @@ const TaskList = () => {
         }
         {
           result.length === 0 && (
-            <Text style={{color: theme.fontColor}}>Vous n'avez pas de tâche en cours</Text>
+            <Text style={{color: theme.fontColor, fontWeight: "500", fontSize: 18}}>Vous n'avez pas de tâche en cours</Text>
           )
         }
       </View>

@@ -18,17 +18,17 @@ import React from "react";
 import ResumeTab from "./../components/PartyDetailsComp/ResumeTab";
 import TasksTab from "./../components/PartyDetailsComp/TasksTab";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const PartyDetails = ({ route, navigation }) => {
-  //   const { testId } = route.params;
+  const { party } = route.params;
   const Tab = createMaterialTopTabNavigator();
   const theme = useSelector((state) => state.themeRedux);
 
   return (
     <>
       <SafeAreaView style={{ backgroundColor: theme.background }}>
-        <View style={[styles.main, {backgroundColor: theme.background}]}>
+        <View style={[styles.main, { backgroundColor: theme.background }]}>
           <View>
             <Pressable
               onPress={() => navigation.navigate("PartyPage")}
@@ -40,12 +40,11 @@ const PartyDetails = ({ route, navigation }) => {
                 style={{
                   width: 20,
                   height: 20,
-                    tintColor: theme.fontColor, 
+                  tintColor: theme.fontColor,
                 }}
               />
               <Text style={{ fontSize: 16, color: theme.fontColor }}>Back</Text>
             </Pressable>
-            {/* <Text>infoTest: {JSON.stringify(testId)}</Text> HERE it's the way to display a props directly in the route parameter */}
           </View>
           <Tab.Navigator
             initialRouteName="Feed"

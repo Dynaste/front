@@ -7,11 +7,12 @@ import NavigatorApp from './src/components/NavigatorApp';
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import React from "react";
+import currentPartyStore from "./src/reducers/currentPartyReducer";
 import partyCreationStore from "./src/reducers/partyCreationReducer";
+import partyReducer from "./src/reducers/partyReducer";
+import taskReducer from "./src/reducers/taskReducer";
 import themeReducer from "./src/reducers/themeReducer";
 import tokenReducer from "./src/reducers/tokenReducer";
-import taskReducer from "./src/reducers/taskReducer";
-import partyReducer from "./src/reducers/partyReducer";
 
 export default function App() {
 
@@ -45,7 +46,8 @@ export default function App() {
     themeRedux: persistedTheme,
     partyCreationRedux: partyCreationStore,
     taskRedux: persistedTasks,
-    partiesRedux: persistedParties
+    partiesRedux: persistedParties,
+    currentPartyRedux: currentPartyStore
   });
 
   const store = createStore(rootReducer);

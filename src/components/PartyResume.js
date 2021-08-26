@@ -1,3 +1,5 @@
+import 'moment/locale/fr'
+
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import {
   borderRadiusValue,
@@ -5,25 +7,40 @@ import {
   displayDim,
   distanceBetween2Element,
 } from "../../helpers/cssValues";
+import { useDispatch, useSelector } from "react-redux";
 
 import React from "react";
-import { useSelector } from "react-redux";
+import moment from "moment";
 
 const PartyResume = ({ navigation, party }) => {
   const theme = useSelector((state) => state.themeRedux);
+  const token = useSelector((state) => state.tokenRedux.jwt);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    console.log(token)
+  }, []);
+
+  const redirectToDetails = () => {
+    dispatch({
+      type: "SET_CURRENT_PARTY",
+      payload: {current: party}
+    })
+    
+    navigation.navigate("PartyDetails", { party: party })
+  }
 
   return (
     <>
       {
-        !party && (
+        !party?.name && (
           <View style={styles.blankContent}>
-            <Text style={{color: 'lightgrey', fontSize: 15}}>Vous n'avez aucune soirée prévue</Text>
+            <Text style={{color: theme.fontColor, fontSize: 18, fontWeight: "500"}}>Nous n'avons rien trouvé</Text>
           </View>
         )
       }
-
       {
-        party && (
+        party?.name && (
           <Pressable
             style={[
               styles.container,
@@ -35,7 +52,7 @@ const PartyResume = ({ navigation, party }) => {
               },
             ]}
             onPress={() =>
-              navigation.navigate("PartyDetails", { testId: "Party ID: 1" })
+              redirectToDetails()
             }>
 
             <View style={styles.pictureContainer}>
@@ -45,15 +62,15 @@ const PartyResume = ({ navigation, party }) => {
                 style={styles.image} />
 
               <View style={styles.date}>
-                <Text>{party?.date}</Text>
+                <Text>{moment().locale("fr").format('DD MMMM', party?.date)}</Text>
               </View>
             </View>
             <View style={styles.users}>
               <View style={styles.owner}>
-                <Text style={{ color: theme.fontColor }}>{party?.username}</Text>
+                <Text style={{ color: theme.fontColor, fontWeight: "500", fontSize: 16 }}>{party?.hostId}</Text>
               </View>
               <View style={styles.participants}>
-                <Text style={{ color: theme.fontColor }}>{party?.guestsList?.length} Participants</Text>
+                <Text style={{ color: theme.fontColor, fontWeight: "500", fontSize: 16 }}>{party?.guestsList?.length} Invité{party?.guestsList?.length > 1 && "s"}</Text>
               </View>
             </View>
             <Text style={[styles.title, { color: theme.fontColor }]}>{party?.name}</Text>

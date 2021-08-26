@@ -21,6 +21,8 @@ import { useSelector } from "react-redux";
 
 const ResumeTab = ({ navigation }) => {
   const theme = useSelector((state) => state.themeRedux);
+  const party = useSelector((state) => state.currentPartyRedux);
+
   return (
     <>
       <SafeAreaView style={{backgroundColor: theme.background}}>
@@ -36,9 +38,9 @@ const ResumeTab = ({ navigation }) => {
               resizeMode="contain"
               style={styles.icon}
             />
-            <Text style={{color: theme.fontColor, fontWeight: defaultTextFontWeight}}>15 avenue de Vaugirard, 75015, Paris</Text>
+            <Text style={{color: theme.fontColor, fontWeight: defaultTextFontWeight, marginLeft: 5}}>{party.current.location.address}</Text>
           </View>
-          <BottomInfoParty navigation={navigation} />
+          <BottomInfoParty navigation={navigation} party={party.current}/>
         </ScrollView>
       </SafeAreaView>
     </>
