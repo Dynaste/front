@@ -89,7 +89,6 @@ const Inscription = ({ navigation, setInscription }) => {
     if (res.status !== 201) {
       setErrorMsg(res.data.message);
       setTimer(5);
-      
     } else {
       const bodyLogin = {
         email: email.toLowerCase(),
@@ -101,26 +100,30 @@ const Inscription = ({ navigation, setInscription }) => {
           type: "add_jwt",
           payload: { jwt: res.data.data.token, date: Date.now() },
         });
-  
+
         navigation.navigate("Home");
       }
     }
   };
 
-  React.useEffect(()=>{
-    if(errorMsg){
-      setTimeout(()=>{setErrorMsg(null)}, 5000);
+  React.useEffect(() => {
+    if (errorMsg) {
+      setTimeout(() => {
+        setErrorMsg(null);
+      }, 5000);
     }
-  }, [errorMsg])
+  }, [errorMsg]);
 
   React.useEffect(() => {
-      timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
+    timer > 0 && setTimeout(() => setTimer(timer - 1), 1000);
   }, [timer]);
 
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: classicBackground }}>
-        <ScrollView style={styles.main}>
+      <SafeAreaView style={{ backgroundColor: theme.background }}>
+        <ScrollView
+          style={[styles.main, { backgroundColor: theme.background }]}
+        >
           <View>
             <Pressable
               onPress={() => setInscription(false)}
@@ -132,12 +135,23 @@ const Inscription = ({ navigation, setInscription }) => {
                 style={{
                   width: 20,
                   height: 20,
+                  tintColor: theme.fontColor,
                 }}
               />
-              <Text style={{ fontSize: 16 }}>Annuler</Text>
+              <Text style={{ fontSize: 16, color: theme.fontColor }}>
+                Annuler
+              </Text>
             </Pressable>
           </View>
-          <View style={styles.loginContainer}>
+          <View
+            style={[
+              styles.loginContainer,
+              {
+                backgroundColor: theme.background,
+                shadowColor: theme.shadowColor,
+              },
+            ]}
+          >
             {stepper !== 0 && (
               <View>
                 <Pressable
@@ -150,24 +164,27 @@ const Inscription = ({ navigation, setInscription }) => {
                     style={{
                       width: 18,
                       height: 18,
+                      tintColor: theme.fontColor
                     }}
                   />
-                  <Text style={{ fontSize: 14 }}>Etape précedente</Text>
+                  <Text style={{ fontSize: 14, color: theme.fontColor }}>Etape précedente</Text>
                 </Pressable>
               </View>
             )}
 
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Inscription</Text>
+              <Text style={[styles.title, {color: theme.fontColor}]}>Inscription</Text>
             </View>
             {stepper === 0 && (
               <>
-                <Text style={styles.label}>Nom de famille</Text>
+                <Text style={[styles.label, {color: theme.fontColor}]}>Nom de famille</Text>
                 <TextInput
+                placeholderTextColor={"#717171"}
                   style={[
                     styles.inputStyle,
                     {
                       borderTopRightRadius: borderRadiusValue,
+                      color: theme.fontColor
                     },
                   ]}
                   onChangeText={(text) => setLastname(text)}
@@ -176,18 +193,20 @@ const Inscription = ({ navigation, setInscription }) => {
                   height={defaultInputSize}
                   placeholder={"Skywalker"}
                 />
-                <Text style={styles.label}>Prénom</Text>
+                <Text style={[styles.label, {color: theme.fontColor}]}>Prénom</Text>
                 <TextInput
-                  style={styles.inputStyle}
+                placeholderTextColor={"#717171"}
+                  style={[styles.inputStyle, {color: theme.fontColor}]}
                   onChangeText={(text) => setFirstname(text)}
                   value={firstname}
                   autoFocus={false}
                   height={defaultInputSize}
                   placeholder={"Luke"}
                 />
-                <Text style={styles.label}>Mail</Text>
+                <Text style={[styles.label, {color: theme.fontColor}]}>Mail</Text>
                 <TextInput
-                  style={styles.inputStyle}
+                placeholderTextColor={"#717171"}
+                  style={[styles.inputStyle, {color: theme.fontColor}]}
                   onChangeText={(text) => setEmail(text)}
                   value={email}
                   autoFocus={false}
@@ -198,12 +217,14 @@ const Inscription = ({ navigation, setInscription }) => {
                   type={"email-address"}
                   autoComplete={"email"}
                 />
-                <Text style={styles.label}>Téléphone</Text>
+                <Text style={[styles.label, {color: theme.fontColor}]}>Téléphone</Text>
                 <TextInput
+                placeholderTextColor={"#717171"}
                   style={[
                     styles.inputStyle,
                     {
                       borderBottomLeftRadius: borderRadiusValue,
+                      color: theme.fontColor
                     },
                   ]}
                   onChangeText={(text) => setPhone(text)}
@@ -219,12 +240,14 @@ const Inscription = ({ navigation, setInscription }) => {
 
             {stepper === 1 && (
               <>
-                <Text style={styles.label}>Pseudo</Text>
+                <Text style={[styles.label, {color: theme.fontColor}]}>Pseudo</Text>
                 <TextInput
+                placeholderTextColor={"#717171"}
                   style={[
                     styles.inputStyle,
                     {
                       borderTopRightRadius: borderRadiusValue,
+                      color: theme.fontColor
                     },
                   ]}
                   onChangeText={(text) => setUsername(text)}
@@ -238,17 +261,19 @@ const Inscription = ({ navigation, setInscription }) => {
 
             {stepper === 2 && (
               <>
-                <Text style={styles.label}>Mot de passe</Text>
-                <Text style={{ marginBottom: 5 }}>
+                <Text style={[styles.label, {color: theme.fontColor}]}>Mot de passe</Text>
+                <Text style={{ marginBottom: 5, color: theme.fontColor }}>
                   (8 caractères minimum, 1 majuscule, 1 chiffre)
                 </Text>
                 <TextInput
+                placeholderTextColor={"#717171"}
                   style={[
                     styles.inputStyle,
                     {
                       borderWidth: 2,
                       borderColor: mainColor,
                       borderTopRightRadius: borderRadiusValue,
+                      color: theme.fontColor
                     },
                   ]}
                   placeholder="not qwerty"
@@ -258,14 +283,16 @@ const Inscription = ({ navigation, setInscription }) => {
                   secureTextEntry={true}
                   autoCorrect={false}
                 />
-                <Text style={styles.label}>Confirmation</Text>
+                <Text style={[styles.label, {color: theme.fontColor}]}>Confirmation</Text>
                 <TextInput
+                placeholderTextColor={"#717171"}
                   style={[
                     styles.inputStyle,
                     {
                       borderWidth: 2,
                       borderColor: mainColor,
                       borderBottomLeftRadius: borderRadiusValue,
+                      color: theme.fontColor
                     },
                   ]}
                   placeholder="not qwerty"
@@ -284,7 +311,7 @@ const Inscription = ({ navigation, setInscription }) => {
                   {
                     backgroundColor: isCompleted(stepper)
                       ? mainColor
-                      : shadowColor,
+                      : theme.shadowColor,
                   },
                 ]}
                 onPress={() => setStepper(stepper + 1)}
@@ -303,7 +330,7 @@ const Inscription = ({ navigation, setInscription }) => {
                   {
                     backgroundColor: isCompleted(stepper)
                       ? mainColor
-                      : shadowColor,
+                      : theme.shadowColor,
                   },
                 ]}
                 onPress={() => postInscription()}
@@ -317,9 +344,22 @@ const Inscription = ({ navigation, setInscription }) => {
           </View>
           {errorMsg && (
             <View style={styles.popupContainer}>
-              <View style={[styles.popup, {backgroundColor: theme.contrastBackground, borderWidth: 2, borderColor: "#E94C2E"}]}>
-                <Text style={{fontSize: 18, textAlign: "center"}}>Error({timer})</Text>
-                <Text style={{fontSize: 18, textAlign: "center"}}>{errorMsg}</Text>
+              <View
+                style={[
+                  styles.popup,
+                  {
+                    backgroundColor: theme.contrastBackground,
+                    borderWidth: 2,
+                    borderColor: "#E94C2E",
+                  },
+                ]}
+              >
+                <Text style={{ fontSize: 18, textAlign: "center" }}>
+                  Error({timer})
+                </Text>
+                <Text style={{ fontSize: 18, textAlign: "center" }}>
+                  {errorMsg}
+                </Text>
               </View>
             </View>
           )}
@@ -368,7 +408,7 @@ const styles = StyleSheet.create({
   },
   label: {
     marginTop: distanceBetween2Element / 2,
-    fontSize: 15
+    fontSize: 16,
   },
   underline: {
     backgroundColor: mainColor,
@@ -378,8 +418,6 @@ const styles = StyleSheet.create({
   },
   loginContainer: {
     width: displayDim.x - 20,
-    backgroundColor: classicBackground,
-    shadowColor: shadowColor,
     shadowOffset: {
       width: 0,
       height: 5,
@@ -416,15 +454,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   popupContainer: {
-    width: displayDim.x -20,
+    width: displayDim.x - 20,
     height: displayDim.y,
     position: "absolute",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-start",
-    elevation: 5
-  }
+    elevation: 5,
+  },
 });
 
 export default Inscription;

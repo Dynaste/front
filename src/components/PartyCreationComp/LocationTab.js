@@ -42,11 +42,11 @@ const LocationTab = ({ navigation }) => {
   const [date, setDate] = React.useState(new Date(1635949730000));
   const [show, setShow] = React.useState(true);
 
-  const [address, setAddress] = React.useState("");
-  const [coord, setCoord] = React.useState({
-    latitude: 48.52258,
-    longitude: 1.693479,
-  });
+  // const [address, setAddress] = React.useState("");
+  // const [coord, setCoord] = React.useState({
+  //   latitude: 48.52258,
+  //   longitude: 1.693479,
+  // });
 
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
